@@ -60,7 +60,7 @@ typings/
 *.tgz
 
 # dotenv environment variables file
-#.env ->Descometar luego
+.env
 .env.test
 
 # Prisma migrations
