@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./dist/src/main.js" ,
+    "start": "node dist/dist/src/main.js" ,
     "dev": "tsnd --respawn --transpile-only --exit-child src/main.ts",
     "build": "tsc"
   },
