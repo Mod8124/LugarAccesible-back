@@ -10,6 +10,7 @@ import type { FastifyRequest, FastifyReply } from 'fastify'
 
 import UserRoutes from './modules/users/users.routes'
 import { userSchema } from "./modules/users/users.schemas";
+import PlacesRoutes from './modules/places/places.routes'
 import { JWT_SECRET } from "../config/";
 
 const path = require('path')
@@ -86,6 +87,7 @@ export function buildApp(){
 
    //::Register routes
    app.register(UserRoutes, {prefix: '/users'})
+   app.register(PlacesRoutes, {prefix: '/places'})
 
    app.register(require('@fastify/static'), {
       root: path.join(__dirname, 'front')
