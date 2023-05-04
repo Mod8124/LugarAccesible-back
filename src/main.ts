@@ -1,7 +1,7 @@
 import { PORT } from "../config/";
-import { buildApp } from "./app";
+import { app } from "./app";
 
-const server = buildApp()
+const server = app
 
 async function main (){
    try {
