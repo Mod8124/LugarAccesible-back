@@ -1,11 +1,10 @@
 import { PORT } from "../config/";
-import { app } from "./app";
-
-const server = app
+import buildApp from "./app";
+const app = buildApp()
 
 async function main (){
    try {
-      await server.listen({port:PORT, host: "0.0.0.0"})
+      await app.listen({port:PORT, host: "0.0.0.0"})
       console.log(`Server running at http://localhost:${PORT}`);
    } catch (err) {
       console.log( err );

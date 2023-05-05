@@ -3,7 +3,7 @@ import { loginHandler, registerUserHandler, getUsersHandler } from "./users.cont
 import { $ref } from "./users.schemas";
 
 async function UserRoutes(app: FastifyInstance){
-   app.post("/", {
+   app.post("/register", {
       schema: {
          body: $ref("createUserSchema"),
          response: {

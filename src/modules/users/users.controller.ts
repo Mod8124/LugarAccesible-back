@@ -1,4 +1,4 @@
-import  { FastifyReply, FastifyRequest } from "fastify";
+import type { FastifyReply, FastifyRequest } from "fastify";
 import { getUsers, createUser, findUserByEmail } from "./users.service";
 import { CreateUserInput, LoginInput } from "./users.schemas";
 import { verifyPassword } from "../../utils/hash";
