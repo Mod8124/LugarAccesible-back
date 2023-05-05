@@ -1,10 +1,46 @@
-import exp from "constants";
 import prisma from "../../utils/prisma";
-import { number } from "zod";
-import { CreateUserDTO, UpdateUserDTO } from "./users.schemas";
+import { hashPassword } from "../../utils/hash";
+import { CreateUserInput } from "./users.schemas";
 
 export async function getUsers() {
-   return await prisma.user.findMany()
+   return await prisma.user.findMany(
+      {
+         select: {
+            id: true,
+            email: true,
+            name: true
+         }
+      }
+   )
+}
+
+export async function createUser(input: CreateUserInput) {
+   const {password, ...res} = input
+   const { hash, salt } = hashPassword(password)
+   const user = await prisma.user.create({
+      data: {
+         ...res, salt, password: hash
+      }
+   })
+   return user
+}
+
+export async function findUserByEmail(email: string) {
+   return prisma.user.findUnique({
+      where: {
+         email
+      }
+   })
+}
+
+export async function findUsers() {
+   return prisma.user.findMany({
+      select: {
+         email: true,
+         name: true,
+         id: true
+      }
+   })   
 }
 
 export async function getUserById(correo: string) {
@@ -20,39 +56,4 @@ export async function getUserById(correo: string) {
          }
       }
    )
-}
-
-export async function saveUser(user: CreateUserDTO) {
-   const newUser = await prisma.user.create({
-      data: {
-         email: user.email,
-         name: user.name,
-         password: user.password
-      },
-      select: {
-         id: true,
-         email: true,
-         name: true
-      }
-   })
-   return newUser
-}
-
-export async function updateUser(correo: string, user: UpdateUserDTO) {
-   const updUser = await prisma.user.update({
-      where: {
-         email: correo
-      },
-      data: {
-         email: user.email,
-         name: user.name,
-         password: user.password
-      },
-      select: {
-         id: true,
-         email: true,
-         name: true
-      }
-   })
-   return updUser
 }
