@@ -1,8 +1,8 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-const PORT = Number(process.env.PORT) || 8080;
-
+const PORT = Number(process.env.PORT) || 3000;
+const JWT_SECRET = String(process.env.JWT_SECRET)
 export {
-   PORT
+   PORT, JWT_SECRET
 }
