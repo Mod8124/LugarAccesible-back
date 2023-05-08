@@ -62,6 +62,8 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
+dist
+/src/front/*
 
 # Prisma migrations
 /prisma/migrations/

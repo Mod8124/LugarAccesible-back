@@ -12,6 +12,9 @@ import UserRoutes from './modules/users/users.routes'
 import { userSchema } from "./modules/users/users.schemas";
 import { JWT_SECRET } from "../config/";
 
+const path = require('path')
+
+
 declare module "fastify" {
    export interface FastifyInstance {
       authenticate: any;
@@ -82,8 +85,11 @@ export function buildApp(){
    }
 
    //::Register routes
-   app.get("/", () => ({message: 'Welcome to our api'}))
    app.register(UserRoutes, {prefix: '/users'})
+
+   app.register(require('@fastify/static'), {
+      root: path.join(__dirname, 'front')
+   })
 
    return app
 }
