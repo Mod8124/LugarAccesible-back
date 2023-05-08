@@ -63,7 +63,7 @@ typings/
 .env
 .env.test
 dist
-front/
+/src/front/*
 
 # Prisma migrations
 /prisma/migrations/
