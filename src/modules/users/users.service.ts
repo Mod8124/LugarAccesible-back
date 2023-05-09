@@ -36,9 +36,8 @@ export async function updateUserById(input: UpdateUserSchema){
          current_location: input.current_location
       }
    })
-   const code = user ? true : false
-   const msn = user ? "Ok" : "Error"
-   return {code, msn}
+   const {id, name, email, current_location} = user
+   return {id, name, email, current_location}
 }
 
 export async function updatePasswordById(input: UpdatePasswordSchema){

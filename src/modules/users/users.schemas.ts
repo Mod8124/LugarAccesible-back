@@ -47,12 +47,26 @@ const loginSchema = z.object({
 })
 
 const loginResponseSchema = z.object({
-    accessToken: z.string()
+    status: z.boolean(),
+    response: z.object({
+        code: z.number(),
+        msn: z.string(),
+        accessToken: z.string()
+    })
 })
 
 const responseOkSchema = z.object({
-    code: z.boolean(),
-    msn: z.string()
+    status: z.boolean(),
+    response: z.object({
+        code: z.number(),
+        msn: z.string(),
+        rta: z.object({
+            id: z.number(),
+            name: z.string(),
+            email: z.string(),
+            current_location: z.string()
+        }).optional()
+    })    
 })
 
 export type CreateUserInput = z.infer<typeof createUserSchema>
