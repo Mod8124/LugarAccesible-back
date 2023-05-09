@@ -10,11 +10,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
   id Int @id @default(autoincrement())
   email String @unique
   name String
   password String
   salt String
+  img_url String?
+  current_location String?
+  fav_places Place[] 
+  commets Comment[]
+}
+
+model Place {
+  id Int @id @default(autoincrement())
+  id_google_place String 
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  commets Comment[]
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int @unique    
+  place Place @relation(fields: [id_place], references: [id])
+  id_place Int @unique
+  text String
+  raiting_comment Int
+  id_respuesta Int
 }

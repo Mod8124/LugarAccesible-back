@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { getUsers, createUser, findUserByEmail } from "./users.service";
-import { CreateUserInput, LoginInput } from "./users.schemas";
+import { getUsers, createUser, findUserByEmail, updateUserById, updatePasswordById } from "./users.service";
+import { CreateUserInput, LoginInput, UpdateUserSchema, UpdatePasswordSchema } from "./users.schemas";
 import { verifyPassword } from "../../utils/hash";
 
 export async function registerUserHandler(
@@ -13,6 +13,36 @@ export async function registerUserHandler(
 
    try {
       const user = await createUser(body)
+      return reply.code(201).send(user)
+   } catch (error) {
+      return reply.code(500).send(error)
+   }
+}
+
+export async function updateUser(
+   request: FastifyRequest<{
+      Body: UpdateUserSchema
+   }>,
+   reply: FastifyReply
+) {
+   const body = request.body
+   try {
+      const user = await updateUserById(body)
+      return reply.code(201).send(user)
+   } catch (error) {
+      return reply.code(500).send(error)
+   }
+}
+
+export async function updatePassword(
+   request: FastifyRequest<{
+      Body: UpdatePasswordSchema
+   }>,
+   reply: FastifyReply
+) {
+   const body = request.body
+   try {
+      const user = await updatePasswordById(body)
       return reply.code(201).send(user)
    } catch (error) {
       return reply.code(500).send(error)
