@@ -31,6 +31,7 @@ async function UserRoutes(app: FastifyInstance){
    }, loginHandler)
 
    app.post("/perfil", {
+      preHandler: [app.authenticate],
       schema: {
          tags: ['User'],
          body: $ref('updateUserSchema'),
@@ -41,6 +42,7 @@ async function UserRoutes(app: FastifyInstance){
    }, updateUser)
 
    app.post("/changepassword", {
+      preHandler: [app.authenticate],
       schema: {
          tags: ['User'],
          body: $ref('updatePasswordSchema'),
