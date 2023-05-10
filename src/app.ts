@@ -12,6 +12,7 @@ import UserRoutes from './modules/users/users.routes'
 import { userSchema } from "./modules/users/users.schemas";
 import PlacesRoutes from './modules/places/places.routes'
 import { JWT_SECRET } from "../config/";
+import { placeSchema } from './modules/places/places.schemas'
 
 const path = require('path')
 
@@ -81,7 +82,7 @@ export function buildApp(){
    )
 
    //::Register Schemas
-   for (const schema of [...userSchema]) {
+   for (const schema of [...userSchema, ...placeSchema]) {
       app.addSchema(schema);
    }
 

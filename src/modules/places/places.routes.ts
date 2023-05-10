@@ -1,9 +1,18 @@
 import { type FastifyInstance } from "fastify";
 import { getPlacesHandler } from "./places.controller";
+import { $placeRef } from "./places.schemas";
+
 
 async function PlacesRoutes(app: FastifyInstance){
 
-   app.get("/",{}, getPlacesHandler)
+   app.get("/list",{
+      schema: {
+         description: 'description',
+         tags: ['Places'],
+         querystring: $placeRef("locationSchema")
+      },
+
+   }, getPlacesHandler)
    
 }
 
