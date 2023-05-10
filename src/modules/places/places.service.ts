@@ -8,9 +8,7 @@ export async function getPlaceBy(input: CreatePlaceSchema) {
 }
 
 export async function createPlace(input: CreatePlaceSchema) {
-    const rta = await prisma.place.create({
+    return await prisma.place.create({
         data: input
     })
-    console.log(rta)
-    return rta
 }
