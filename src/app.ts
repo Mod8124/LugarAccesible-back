@@ -9,7 +9,10 @@ import swaggerUI from "@fastify/swagger-ui"
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
 import UserRoutes from './modules/users/users.routes'
+import PlaceRoutes from "./modules/places/places.routes"
+
 import { userSchema } from "./modules/users/users.schemas";
+import { placeSchema } from "./modules/places/places.schemas"
 import { JWT_SECRET } from "../config/";
 
 const path = require('path')
@@ -80,12 +83,13 @@ export function buildApp(){
    )
 
    //::Register Schemas
-   for (const schema of [...userSchema]) {
+   for (const schema of [...userSchema, ...placeSchema]) {
       app.addSchema(schema);
    }
 
    //::Register routes
    app.register(UserRoutes, {prefix: '/users'})
+   app.register(PlaceRoutes, {prefix: '/places'})
 
    app.register(require('@fastify/static'), {
       root: path.join(__dirname, 'front')
