@@ -26,11 +26,23 @@ export async function updateUser(
    reply: FastifyReply
 ) {
    const body = request.body
+   const rta = { status: false, response: {}}
+   const rsp = {code: 401, msn: '', rta: {}}
+
    try {
+      rta.status = true
+      rsp.code = 201
       const user = await updateUserById(body)
-      return reply.code(201).send(user)
+      rsp.msn = (user) ? "Ok" : "Error"
+      rsp.rta = user
+      
+      rta.response = rsp
+      return reply.code(201).send(rta)
    } catch (error) {
-      return reply.code(500).send(error)
+      rsp.code = 500
+      rsp.msn = "Error"
+      rta.response = rsp
+      return reply.code(500).send(rta)
    }
 }
 
@@ -41,11 +53,22 @@ export async function updatePassword(
    reply: FastifyReply
 ) {
    const body = request.body
+   const rta = { status: false, response: {}}
+   const rsp = {code: 401, msn: ''}
+
    try {
+      rta.status = true
+      rsp.code = 201
+
       const user = await updatePasswordById(body)
-      return reply.code(201).send(user)
+      rsp.msn = (user) ? "Ok" : "Error"
+      rta.response = rsp
+      return reply.code(201).send(rta)
    } catch (error) {
-      return reply.code(500).send(error)
+      rsp.code = 500
+      rsp.msn = "Error"
+      rta.response = rsp
+      return reply.code(500).send(rta)
    }
 }
 
@@ -58,10 +81,12 @@ export async function loginHandler (
    const body = request.body
    //consultar usuario
    const user = await findUserByEmail(body.email)
+   const rta = { status: false, response: {}}
+   const rsp = {code: 401, msn: '', accessToken: ''}
    if(!user) {
-      return reply.code(401).send({
-         message: "Invalido email o pasword"
-      })
+      rsp.msn = 'No existe email'
+      rta.response = rsp
+      return reply.code(401).send(rta)
    }
 
    //verificar pasword
@@ -74,12 +99,16 @@ export async function loginHandler (
    if(correctPassword) {
       const { password, salt, ...res} = user
       const token = await reply.jwtSign(res)
-      return { accessToken: token}
+      rta.status = true
+      rsp.code = 201
+      rsp.msn = "Datos correctos"
+      rsp.accessToken = token
+      rta.response = rsp
+      return rta
    }
-
-   return reply.code(401).send({
-      message: "Invalido email o pasword"
-   })
+   rsp.msn = "Clave incorrecta"
+   rta.response = rsp
+   return rta
 }
 
 export async function getUsersHandler(
