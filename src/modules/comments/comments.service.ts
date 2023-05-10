@@ -13,7 +13,11 @@ export async function getCommentBy(input: CreateComments) {
 
 export async function createComment(input: CreateComments) {
     return await prisma.comment.create({
-        data: input
+        data: {
+            userId: input.userId,
+            text: input.text,
+            id_place: input.id_place
+        }
     })
 }
 
