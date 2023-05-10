@@ -12,7 +12,6 @@ export async function getCommentBy(input: CreateComments) {
 }
 
 export async function createComment(input: CreateComments) {
-    console.log("Crj",input)
     return await prisma.comment.create({
         data: input
     })
@@ -21,7 +20,6 @@ export async function createComment(input: CreateComments) {
 export async function updateCommtent(input: UpdateComments) {
     const id_respuesta = (input.id_respuesta) ? input.id_respuesta : 0
     const text = (input.text) ? input.text : ''
-    console.log(input)
     return await prisma.comment.update({
         where: {
             id: input.id

@@ -28,8 +28,6 @@ export async function registerComment(
             rps.rta = upd
         }
         else {
-            console.log(comment)
-            console.log("SAve")
             const send = {
                 ...comment
             }

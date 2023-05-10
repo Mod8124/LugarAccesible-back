@@ -15,7 +15,6 @@ export async function registerPlaces(
         const data = await getPlaceBy(places)
         rsp.code = 200
         rsp.msn = "Ya se registro"
-        console.log(data)
         if(!data.length) {
             const rst = await createPlace(places)
             rsp.msn = (rst) ? "Se guardo" : "Error"
