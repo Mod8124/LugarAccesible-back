@@ -28,7 +28,7 @@ export async function updateCommtent(input: UpdateComments) {
         },
         data: {
             text,
-            id_respuesta
+            id_commet_response: id_respuesta
         }
     })
 }

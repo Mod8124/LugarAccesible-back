@@ -8,7 +8,8 @@ const locationSchema = z.object({
 
 const placeCore = {
     id_google_place: z.string(),
-    userId: z.number()
+    userId: z.number(),
+    raiting: z.number()
 }
 
 const rspCore = {
