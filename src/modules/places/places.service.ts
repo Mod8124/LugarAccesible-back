@@ -1,9 +1,11 @@
+import prisma from '../../utils/prisma'
+import {CreatePlaceSchema} from './places.schemas'
 import { GOOGLE_MAPS_KEY } from "../../../config";
+
 export type Location = {
    lat: string,
    lng: string
 }
-
 export interface Place {
    place_id: string,
    icon: string,
@@ -11,6 +13,13 @@ export interface Place {
    location: Location,   
    types: string
 }
+
+export async function getPlaceBy(input: CreatePlaceSchema) {
+    return await prisma.place.findMany({
+        where: input
+    }) 
+}
+
 const endPoint = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
 
 export async function getPlaces(location: Location) {
@@ -34,4 +43,10 @@ export async function getPlaces(location: Location) {
          return lista
       })
       return result;
+}
+
+export async function createPlace(input: CreatePlaceSchema) {
+    return await prisma.place.create({
+        data: input
+    })
 }

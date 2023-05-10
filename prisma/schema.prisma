@@ -34,11 +34,11 @@ model Place {
 model Comment {
   id Int @id @default(autoincrement())
   user User @relation(fields: [userId], references: [id])
-  userId Int @unique    
+  userId Int @unique
   place Place @relation(fields: [id_place], references: [id])
   id_place Int @unique
-  text String
-  raiting_comment Int
+  text String?
+  raiting_comment Int?
   id_commet_response Int?
 }
 
