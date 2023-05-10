@@ -1,14 +1,24 @@
 import { type FastifyInstance } from "fastify";
-import { registerPlaces } from "./places.controller"
-import { $ref } from "./places.schemas"
+import { registerPlaces, getPlacesHandler } from "./places.controller"
+import { $placeRef } from "./places.schemas"
 
 export async function PlaceRoutes(app: FastifyInstance) {
+
+    app.get("/list",{
+        schema: {
+        //    description: 'description',
+           tags: ['Places'],
+           querystring: $placeRef("locationSchema")
+        },
+  
+     }, getPlacesHandler)
+
     app.post("/register", {
         schema: {
-            tags: ["Place"],
-            body: $ref("createPlaceSchema"),
+            tags: ['Places'],
+            body: $placeRef("createPlaceSchema"),
             response: {
-                201: $ref("responsePlaceSchema")
+                201: $placeRef("responsePlaceSchema")
             }
         }
     }, registerPlaces)

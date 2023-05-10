@@ -1,6 +1,11 @@
 import { z } from "zod";
 import { buildJsonSchemas } from "fastify-zod";
 
+const locationSchema = z.object({
+    lat: z.number(),
+    lng: z.number(),
+ })
+
 const placeCore = {
     id_google_place: z.string(),
     userId: z.number()
@@ -29,9 +34,8 @@ const responsePlaceSchema = z.object({
 
 export type CreatePlaceSchema = z.infer<typeof createPlaceSchema>
 
-export const {schemas: placeSchema, $ref} = buildJsonSchemas({
+export const {schemas: placeSchema, $ref:$placeRef} = buildJsonSchemas({
     createPlaceSchema,
-    responsePlaceSchema
+    responsePlaceSchema,
+    locationSchema
 }, {$id:'Place_Schemas'})
-
-

@@ -17,6 +17,7 @@ import { placeSchema } from "./modules/places/places.schemas"
 import { CommentSchema } from './modules/comments/comments.schemas'
 
 import { JWT_SECRET } from "../config/";
+import { placeSchema } from './modules/places/places.schemas'
 
 const path = require('path')
 
