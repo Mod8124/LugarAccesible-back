@@ -34,7 +34,7 @@ const responsePlaceSchema = z.object({
 
 export type CreatePlaceSchema = z.infer<typeof createPlaceSchema>
 
-export const {schemas: placeSchema, $placeRef} = buildJsonSchemas({
+export const {schemas: placeSchema, $ref:$placeRef} = buildJsonSchemas({
     createPlaceSchema,
     responsePlaceSchema,
     locationSchema

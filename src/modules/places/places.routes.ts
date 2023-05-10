@@ -6,7 +6,7 @@ export async function PlaceRoutes(app: FastifyInstance) {
 
     app.get("/list",{
         schema: {
-           description: 'description',
+        //    description: 'description',
            tags: ['Places'],
            querystring: $placeRef("locationSchema")
         },
@@ -15,7 +15,7 @@ export async function PlaceRoutes(app: FastifyInstance) {
 
     app.post("/register", {
         schema: {
-            tags: ["Place"],
+            tags: ['Places'],
             body: $placeRef("createPlaceSchema"),
             response: {
                 201: $placeRef("responsePlaceSchema")
