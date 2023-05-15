@@ -1,4 +1,4 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import {  FastifyReply, FastifyRequest } from "fastify";
 import { getResults } from "./search.service";
 
 interface MyQuery {

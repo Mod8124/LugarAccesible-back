@@ -1,5 +1,5 @@
 import { type FastifyInstance } from "fastify";
-import { getSearch,errorHandler } from "./search.controller";
+import { getSearch, errorHandler } from "./search.controller";
 import { $ref } from "./search.schema";
 
 export async function SearchRoutes(app: FastifyInstance) {
