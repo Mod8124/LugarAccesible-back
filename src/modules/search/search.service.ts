@@ -129,7 +129,7 @@ interface IResults {
 
 // getting the whole data from the search (first)
 const getSearch = async ({ lat, lng, query, types }: IGetSearchParams) => {
-  const response = await fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?radius=5000&query=${query}&location=${lat}+${lng}&key=${GOOGLE_MAPS_KEY}&types=${types}`);
+  const response = await fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&location=${lat},${lng}&key=${GOOGLE_MAPS_KEY}&types=${types}`);
   const data = await response.json();
   return data.results;
 };
