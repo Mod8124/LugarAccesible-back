@@ -57,6 +57,17 @@ const searchComment = z.object({
     id_place: z.number()
 })
 
+const responseSuccessPlacesList = z.array(z.object({
+    place_id: z.string(),
+    name: z.string(),
+    types: z.array(z.string()),
+    location: z.object({
+                lat: z.string(),
+                lng: z.string()
+    }),
+    wheelchair_accessible_entrance: z.boolean(),
+}))
+
 export type CreateComments = z.infer<typeof createComments>
 export type UpdateComments = z.infer<typeof updateComments>
 export type SearchComment = z.infer<typeof searchComment>
@@ -69,6 +80,7 @@ export const {schemas: placeSchema, $ref:$placeRef} = buildJsonSchemas({
     searchComment,
     idComens,
     reviewComment,
-    responseCommentSchema
-    locationSchema
+    responseCommentSchema,
+    locationSchema,
+    responseSuccessPlacesList
 }, {$id:'Place_Schemas'})

@@ -8,7 +8,10 @@ export async function PlaceRoutes(app: FastifyInstance) {
         schema: {
         //    description: 'description',
            tags: ['Places'],
-           querystring: $placeRef("locationSchema")
+           querystring: $placeRef("locationSchema"),
+           response:{
+            200:$placeRef('responseSuccessPlacesList')
+           }
         },
   
      }, getPlacesHandler)

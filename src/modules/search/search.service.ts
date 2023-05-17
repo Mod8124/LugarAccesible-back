@@ -135,14 +135,14 @@ const getSearch = async ({ lat, lng, query, types }: IGetSearchParams) => {
 };
 
 // getting if the place has for wheelchair sometimes the place not return nothing this mean is not accessible (second)
-const getWeelChair = async (place_id:string) => {
+export const getWeelChair = async (place_id:string) => {
     const response = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${GOOGLE_MAPS_KEY}`);
     const data = await response.json();
      return "wheelchair_accessible_entrance" in data.result ? data.result.wheelchair_accessible_entrance : false;
 } 
 
 // filter the types from the keywords of the top of the file
-const filteredTypes = (type:string) => {
+export const filteredTypes = (type:string) => {
     return type === keywords[type]
 }
 
