@@ -1,11 +1,21 @@
 import { z } from "zod";
 import { buildJsonSchemas } from "fastify-zod";
+import { editComment } from "./comments.service";
+
+const idComens = z.object({
+    id: z.number()
+})
+
+const corEditComment = {
+    text: z.string().optional(),
+    raiting_comment: z.number().optional(),
+    id_respuesta: z.number().optional()
+}
 
 const coreComments = {
     userId: z.number(),
     id_place: z.number(),
-    text: z.string().optional(),
-    id_respuesta: z.number().optional()
+    ...corEditComment
 }
 
 const rspCore = {
@@ -24,8 +34,7 @@ const createComments = z.object({
 
 const updateComments = z.object({
     id: z.number(),
-    text: z.string().optional(),
-    id_respuesta: z.number().optional()
+    ...coreComments
 })
 
 const responseCommentSchema = z.object({
@@ -35,11 +44,26 @@ const responseCommentSchema = z.object({
     })
 })
 
+const reviewComment = z.object({
+    ...corEditComment
+})
+
+const searchComment = z.object({
+    userId: z.number(),
+    id_place: z.number()
+})
+
 export type CreateComments = z.infer<typeof createComments>
 export type UpdateComments = z.infer<typeof updateComments>
+export type SearchComment = z.infer<typeof searchComment>
+export type IdComens = z.infer<typeof idComens>
+export type ReviewComment = z.infer.<typeof reviewComment>
 
 export const {schemas: CommentSchema, $ref} = buildJsonSchemas({
     createComments,
     updateComments,
+    searchComment,
+    idComens,
+    reviewComment,
     responseCommentSchema
 }, {$id:'Comment_Schema'})

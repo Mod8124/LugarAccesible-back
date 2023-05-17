@@ -1,9 +1,9 @@
 import { type FastifyInstance } from "fastify";
-import { registerPlaces } from "./places.controller"
+import { searchPlaceByPlaceGoogle, savePlaces, caculateRating } from "./places.controller"
 import { $ref } from "./places.schemas"
 
 export async function PlaceRoutes(app: FastifyInstance) {
-    app.post("/register", {
+    app.post("/create", {
         schema: {
             tags: ["Place"],
             body: $ref("createPlaceSchema"),
@@ -11,7 +11,28 @@ export async function PlaceRoutes(app: FastifyInstance) {
                 201: $ref("responsePlaceSchema")
             }
         }
-    }, registerPlaces)
+    }, savePlaces)
+
+    app.get("/searchByIdGoogle/:id_google_place", {
+        schema: {
+            tags: ["Place"],
+            params: $ref("createPlaceSchema"),
+            response: {
+                201: $ref("responsePlaceSchema")
+            }
+        }
+    }, searchPlaceByPlaceGoogle)
+
+    app.get("/ratingavg/:id", {
+        schema: {
+            tags: ["Place"],
+            params: $ref("idPlaceSchema"),
+            response: {
+                201: $ref("responsePlaceSchema")
+            }
+        }
+
+    }, caculateRating)
 }
 
 export default PlaceRoutes

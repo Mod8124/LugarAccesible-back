@@ -1,5 +1,5 @@
 import prisma from '../../utils/prisma'
-import { CreateComments, UpdateComments } from "./comments.schemas"
+import { CreateComments, ReviewComment, UpdateComments } from "./comments.schemas"
 
 export async function getCommentBy(input: CreateComments) {
     const data = await prisma.comment.findMany({
@@ -9,6 +9,15 @@ export async function getCommentBy(input: CreateComments) {
         }
     })
     return data.length ? data[0] : null
+}
+
+export async function getDetailComment(idplace: number, iduser: number) {
+    return await prisma.comment.findFirst({
+        where: {
+            id_place: idplace,
+            userId: iduser
+        }
+    })
 }
 
 export async function createComment(input: CreateComments) {
@@ -31,6 +40,19 @@ export async function updateCommtent(input: UpdateComments) {
         data: {
             text,
             id_respuesta
+        }
+    })
+}
+
+export async function editComment(id: number, input: ReviewComment) {
+    return await prisma.comment.update({
+        where: {
+            id
+        },
+        data: {
+            text: input.text ? input.text : null,
+            raiting_comment: input.raiting_comment ? input.raiting_comment : null,
+            id_respuesta: input.id_respuesta ? input.id_respuesta : null
         }
     })
 }
