@@ -33,10 +33,22 @@ const responsePlaceSchema = z.object({
     })
 })
 
+const responseSuccessPlacesList = z.array(z.object({
+    place_id: z.string(),
+    name: z.string(),
+    types: z.array(z.string()),
+    location: z.object({
+                lat: z.string(),
+                lng: z.string()
+    }),
+    wheelchair_accessible_entrance: z.boolean(),
+}))
+
 export type CreatePlaceSchema = z.infer<typeof createPlaceSchema>
 
 export const {schemas: placeSchema, $ref:$placeRef} = buildJsonSchemas({
     createPlaceSchema,
     responsePlaceSchema,
-    locationSchema
+    locationSchema,
+    responseSuccessPlacesList
 }, {$id:'Place_Schemas'})
