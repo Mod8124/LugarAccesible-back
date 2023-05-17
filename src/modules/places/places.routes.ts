@@ -1,14 +1,34 @@
 import { type FastifyInstance } from "fastify";
-import { searchPlaceByPlaceGoogle, savePlaces, caculateRating } from "./places.controller"
-import { $ref } from "./places.schemas"
+import { searchPlaceByPlaceGoogle, savePlaces, caculateRating, getPlacesHandler } from "./places.controller"
+import { $placeRef } from "./places.schemas"
 
 export async function PlaceRoutes(app: FastifyInstance) {
+
+    app.get("/list",{
+        schema: {
+        //    description: 'description',
+           tags: ['Places'],
+           querystring: $placeRef("locationSchema")
+        },
+  
+     }, getPlacesHandler)
+
+    app.post("/register", {
+        schema: {
+            tags: ['Places'],
+            body: $placeRef("createPlaceSchema"),
+            response: {
+                201: $placeRef("responsePlaceSchema")
+            }
+        }
+    }, registerPlaces)
+  
     app.post("/create", {
         schema: {
             tags: ["Place"],
-            body: $ref("createPlaceSchema"),
+            body: $placeRef("createPlaceSchema"),
             response: {
-                201: $ref("responsePlaceSchema")
+                201: $placeRef("responsePlaceSchema")
             }
         }
     }, savePlaces)
@@ -16,9 +36,9 @@ export async function PlaceRoutes(app: FastifyInstance) {
     app.get("/searchByIdGoogle/:id_google_place", {
         schema: {
             tags: ["Place"],
-            params: $ref("createPlaceSchema"),
+            params: $placeRef("createPlaceSchema"),
             response: {
-                201: $ref("responsePlaceSchema")
+                201: $placeRef("responsePlaceSchema")
             }
         }
     }, searchPlaceByPlaceGoogle)
@@ -26,9 +46,9 @@ export async function PlaceRoutes(app: FastifyInstance) {
     app.get("/ratingavg/:id", {
         schema: {
             tags: ["Place"],
-            params: $ref("idPlaceSchema"),
+            params: $placeRef("idPlaceSchema"),
             response: {
-                201: $ref("responsePlaceSchema")
+                201: $placeRef("responsePlaceSchema")
             }
         }
 

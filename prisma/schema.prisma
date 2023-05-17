@@ -36,5 +36,6 @@ model Comment {
   id_place Int
   text String?
   raiting_comment Int?
-  id_respuesta Int?
+  id_commet_response Int?
 }
+

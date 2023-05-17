@@ -17,8 +17,8 @@ export async function registerComment(
         rps.code = 200
         
         if(data) {
-            comment.id_respuesta = (data?.id_respuesta) ? data?.id_respuesta : 0
-            let raiting_comment = (data?.raiting_comment) ? data?.raiting_comment : 0
+            comment.id_respuesta = (data?.id_commet_response) ? data?.id_commet_response : 0
+            const raiting_comment = (data?.raiting_comment) ? data?.raiting_comment : 0
             const send = {
                 id: data.id,
                 raiting_comment,
