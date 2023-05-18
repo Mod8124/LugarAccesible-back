@@ -18,25 +18,22 @@ model User {
   salt String
   img_url String?
   current_location String?
-  fav_places Place[] 
   commets Comment[]
 }
 
 model Place {
   id Int @id @default(autoincrement())
-  id_google_place String 
-  raiting Int
-  user User @relation(fields: [userId], references: [id])
-  userId Int
+  id_google_place String @unique
+  rating Decimal?
   commets Comment[]
 }
 
 model Comment {
   id Int @id @default(autoincrement())
   user User @relation(fields: [userId], references: [id])
-  userId Int @unique
+  userId Int
   place Place @relation(fields: [id_place], references: [id])
-  id_place Int @unique
+  id_place Int
   text String?
   raiting_comment Int?
   id_commet_response Int?
