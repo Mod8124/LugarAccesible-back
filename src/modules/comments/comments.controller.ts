@@ -14,17 +14,20 @@ export async function registerComment(
     const rps = {code: 500, msn: 'Error', rta: {}}
     try {
         const data = await getCommentBy(comment)
+        console.log(data)
         rps.code = 200
         
         if(data) {
-            comment.id_respuesta = (data?.id_commet_response) ? data?.id_commet_response : 0
-            const raiting_comment = (data?.raiting_comment) ? data?.raiting_comment : 0
+            comment.id_commet_response = (data?.id_commet_response) ? data?.id_commet_response : 0
+            
+            const raiting_comment = comment.raiting_comment
+            console.log("raiting_comment", raiting_comment)
             const send = {
                 id: data.id,
                 raiting_comment,
                 ...comment
             }
-            const upd = await updateCommtent(send)
+            const upd = await editComment(send)
             rps.msn = (upd) ? "Edito Ok" : "Error"
             rps.rta = upd
         }

@@ -4,57 +4,54 @@ import { buildJsonSchemas } from "fastify-zod";
 const locationSchema = z.object({
     lat: z.number(),
     lng: z.number(),
- })
-
-const idComens = z.object({
-    id: z.number()
 })
 
-const corEditComment = {
-    text: z.string().optional(),
-    raiting_comment: z.number().optional(),
-    id_respuesta: z.number().optional()
+const setId = {
+    id: z.number()
 }
 
-const coreComments = {
-    userId: z.number(),
-    id_place: z.number(),
-    ...corEditComment
+const setRtng = {
+    rating: z.number().optional()
+}
+
+const idPlaceSchema = z.object(setId)
+
+const placeCore = {
+    id_google_place: z.string()
+}
+
+const updateAvg = {
+    ...setId
 }
 
 const rspCore = {
     code: z.number(),
     msn: z.string(),
     rta: z.object({
-        id: z.number(),
-        ...coreComments
+        ...setId,
+        ...placeCore,
+        ...setRtng
         }
     ).optional()
 }
 
-const createComments = z.object({    
-    ...coreComments
+const searchPlaceSchema = z.object({
+    ...setId
 })
 
-const updateComments = z.object({
-    id: z.number(),
-    ...coreComments
+const createPlaceSchema = z.object({
+    ...placeCore
 })
 
-const responseCommentSchema = z.object({
+const updatePlaceAvgSchema = z.object({
+    ...setRtng
+})
+
+const responsePlaceSchema = z.object({
     status: z.boolean(),
     response: z.object({
         ...rspCore
     })
-})
-
-const reviewComment = z.object({
-    ...corEditComment
-})
-
-const searchComment = z.object({
-    userId: z.number(),
-    id_place: z.number()
 })
 
 const responseSuccessPlacesList = z.array(z.object({
@@ -68,19 +65,17 @@ const responseSuccessPlacesList = z.array(z.object({
     wheelchair_accessible_entrance: z.boolean(),
 }))
 
-export type CreateComments = z.infer<typeof createComments>
-export type UpdateComments = z.infer<typeof updateComments>
-export type SearchComment = z.infer<typeof searchComment>
-export type IdComens = z.infer<typeof idComens>
-export type ReviewComment = z.infer<typeof reviewComment>
+export type CreatePlaceSchema = z.infer<typeof createPlaceSchema>
+export type idPlaceSchema = z.infer<typeof idPlaceSchema>
+export type UpdatePlaceAvgSchema = z.infer<typeof updatePlaceAvgSchema>
+export type SearchPlaceSchema = z.infer<typeof searchPlaceSchema>
 
 export const {schemas: placeSchema, $ref:$placeRef} = buildJsonSchemas({
-    createComments,
-    updateComments,
-    searchComment,
-    idComens,
-    reviewComment,
-    responseCommentSchema,
-    locationSchema,
-    responseSuccessPlacesList
+    createPlaceSchema,
+    idPlaceSchema,
+    updatePlaceAvgSchema,
+    searchPlaceSchema,
+    responsePlaceSchema,
+    responseSuccessPlacesList,
+    locationSchema
 }, {$id:'Place_Schemas'})

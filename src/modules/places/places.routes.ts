@@ -3,29 +3,17 @@ import { searchPlaceByPlaceGoogle, savePlaces, caculateRating, getPlacesHandler 
 import { $placeRef } from "./places.schemas"
 
 export async function PlaceRoutes(app: FastifyInstance) {
-
     app.get("/list",{
         schema: {
-        //    description: 'description',
-           tags: ['Places'],
-           querystring: $placeRef("locationSchema"),
-           response:{
+            //    description: 'description',
+            tags: ['Place'],
+            querystring: $placeRef("locationSchema"),
+            response:{
             200:$placeRef('responseSuccessPlacesList')
-           }
-        },
-  
-     }, getPlacesHandler)
-
-    app.post("/register", {
-        schema: {
-            tags: ['Places'],
-            body: $placeRef("createPlaceSchema"),
-            response: {
-                201: $placeRef("responsePlaceSchema")
-            }
         }
-    }, registerPlaces)
-  
+        },
+    }, getPlacesHandler)
+
     app.post("/create", {
         schema: {
             tags: ["Place"],
