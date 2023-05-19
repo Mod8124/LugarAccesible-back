@@ -8,7 +8,7 @@ export async function getCommentBy(input: CreateComments) {
             userId: input.userId
         }
     })
-    return data.length ? data[0] : null
+    return data
 }
 
 export async function getDetailComment(idplace: number, iduser: number) {
@@ -32,7 +32,7 @@ export async function createComment(input: CreateComments) {
 }
 
 export async function updateCommtent(input: UpdateComments) {
-    const id_commet_response = (input.id_commet_response) ? input.id_commet_response : 0
+    const id_commet_response = (input.id_commet_response) ? input.id_commet_response : null
     const text = (input.text) ? input.text : ''
     
     return await prisma.comment.update({
@@ -41,7 +41,7 @@ export async function updateCommtent(input: UpdateComments) {
         },
         data: {
             text,
-            id_commet_response: id_commet_response ? id_commet_response : null,
+            id_commet_response: input.id_commet_response ? input.id_commet_response : null,
             raiting_comment: (input.raiting_comment) ? input.raiting_comment : null
         }
     })

@@ -57,7 +57,7 @@ export type CreateComments = z.infer<typeof createComments>
 export type UpdateComments = z.infer<typeof updateComments>
 export type SearchComment = z.infer<typeof searchComment>
 export type IdComens = z.infer<typeof idComens>
-export type ReviewComment = z.infer.<typeof reviewComment>
+export type ReviewComment = z.infer<typeof reviewComment>
 
 export const {schemas: CommentSchema, $ref} = buildJsonSchemas({
     createComments,
