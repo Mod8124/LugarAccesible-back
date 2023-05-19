@@ -24,8 +24,9 @@ export async function createComment(input: CreateComments) {
     return await prisma.comment.create({
         data: {
             userId: input.userId,
-            text: input.text,
-            id_place: input.id_place
+            text: input.text ? input.text : null,
+            id_place: input.id_place,
+            raiting_comment: (input.raiting_comment) ? input.raiting_comment : null
         }
     })
 }
@@ -33,7 +34,7 @@ export async function createComment(input: CreateComments) {
 export async function updateCommtent(input: UpdateComments) {
     const id_commet_response = (input.id_commet_response) ? input.id_commet_response : 0
     const text = (input.text) ? input.text : ''
-    console.log("Edita data")
+    
     return await prisma.comment.update({
         where: {
             id: input.id
