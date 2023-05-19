@@ -9,7 +9,7 @@ const idComens = z.object({
 const corEditComment = {
     text: z.string().optional(),
     raiting_comment: z.number().optional(),
-    id_respuesta: z.number().optional()
+    id_commet_response: z.number().optional()
 }
 
 const coreComments = {
