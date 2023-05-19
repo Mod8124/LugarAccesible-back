@@ -14,17 +14,21 @@ export async function registerComment(
     const rps = {code: 500, msn: 'Error', rta: {}}
     try {
         const data = await getCommentBy(comment)
-        rps.code = 200
         
+        rps.code = 200
+        let idplace = 0
         if(data) {
-            comment.id_respuesta = (data?.id_commet_response) ? data?.id_commet_response : 0
-            const raiting_comment = (data?.raiting_comment) ? data?.raiting_comment : 0
+            comment.id_commet_response = (data?.id_commet_response) ? data?.id_commet_response : 0
+            
+            const raiting_comment = comment.raiting_comment
+            
             const send = {
                 id: data.id,
                 raiting_comment,
                 ...comment
             }
-            const upd = await updateCommtent(send)
+            const upd = await editComment(send)
+            idplace = upd.id_place
             rps.msn = (upd) ? "Edito Ok" : "Error"
             rps.rta = upd
         }
@@ -33,10 +37,12 @@ export async function registerComment(
                 ...comment
             }
             const save = await createComment(send)
+            idplace = save.id_place
             rps.msn = (save) ? "Guardo Ok" : "Error"
             rps.rta = save
         }
         rta.response = rps
+        const avg = idplace ? await calculateAvg(idplace) : null
         return reply.code(201).send(rta)
     } catch (error) {
         rta.response = rps

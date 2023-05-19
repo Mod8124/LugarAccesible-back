@@ -24,22 +24,25 @@ export async function createComment(input: CreateComments) {
     return await prisma.comment.create({
         data: {
             userId: input.userId,
-            text: input.text,
-            id_place: input.id_place
+            text: input.text ? input.text : null,
+            id_place: input.id_place,
+            raiting_comment: (input.raiting_comment) ? input.raiting_comment : null
         }
     })
 }
 
 export async function updateCommtent(input: UpdateComments) {
-    const id_respuesta = (input.id_respuesta) ? input.id_respuesta : 0
+    const id_commet_response = (input.id_commet_response) ? input.id_commet_response : 0
     const text = (input.text) ? input.text : ''
+    
     return await prisma.comment.update({
         where: {
             id: input.id
         },
         data: {
             text,
-            id_commet_response: id_respuesta
+            id_commet_response: id_commet_response ? id_commet_response : null,
+            raiting_comment: (input.raiting_comment) ? input.raiting_comment : null
         }
     })
 }
@@ -52,7 +55,7 @@ export async function editComment(id: number, input: ReviewComment) {
         data: {
             text: input.text ? input.text : null,
             raiting_comment: input.raiting_comment ? input.raiting_comment : null,
-            id_respuesta: input.id_respuesta ? input.id_respuesta : null
+            id_commet_response: input.id_commet_response ? input.id_commet_response : null
         }
     })
 }
