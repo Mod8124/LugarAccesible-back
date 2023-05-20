@@ -1,6 +1,6 @@
 import prisma from "../../utils/prisma";
 import { hashPassword } from "../../utils/hash";
-import { CreateUserInput, UpdatePasswordSchema, UpdateUserSchema } from "./users.schemas";
+import { ActivateSchema, CreateUserInput, EmailSchema, UpdatePasswordSchema, UpdateUserSchema } from "./users.schemas";
 
 export async function getUsers() {
    return await prisma.user.findMany(
@@ -58,11 +58,20 @@ export async function updatePasswordById(input: UpdatePasswordSchema){
 }
 
 export async function findUserByEmail(email: string) {
-   return prisma.user.findUnique({
+   const data = await prisma.user.findMany({
       where: {
          email
+      },
+      select: {
+         id: true,
+         name: true,
+         email: true,
+         status: true,
+         password: true,
+         salt: true
       }
    })
+   return data
 }
 
 export async function findUsers() {
@@ -88,4 +97,42 @@ export async function getUserById(correo: string) {
          }
       }
    )
+}
+
+export async function setActivateUser(encrip: ActivateSchema) {
+   const info = await prisma.user.findMany({
+      where: {
+         salt: encrip.salt,
+         status: false
+      },
+      select : {
+         id: true,
+         email: true
+      }
+   })
+
+   let upd = {}
+
+   if((info.length)) {
+      upd = await prisma.user.update({
+         where: {
+            email: info[0].email
+         },
+         data : {
+            status : true
+         },
+         select: {
+            email: true
+         }
+      })
+   }
+   return upd   
+}
+
+export async function getUserUnique(input: EmailSchema) {
+   return await prisma.user.findUnique({
+      where: {
+         email: input.email
+      }
+   })
 }

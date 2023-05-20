@@ -51,7 +51,9 @@ const loginResponseSchema = z.object({
     response: z.object({
         code: z.number(),
         msn: z.string(),
-        accessToken: z.string()
+        accessToken: z.string(),
+        name: z.string(),
+        email: z.string()
     })
 })
 
@@ -69,9 +71,22 @@ const responseOkSchema = z.object({
     })    
 })
 
+const activateSchema = z.object({
+    salt: z.string()
+})
+
+const emailSchema = z.object({
+    email: z.string({
+        required_error: "Requiere email",
+        invalid_type_error: "El correo debe ser cadena"
+    }).email()
+})
+
 export type CreateUserInput = z.infer<typeof createUserSchema>
 export type UpdateUserSchema = z.infer<typeof updateUserSchema>
 export type UpdatePasswordSchema = z.infer<typeof updatePasswordSchema>
+export type ActivateSchema = z.infer<typeof activateSchema>
+export type EmailSchema = z.infer<typeof emailSchema>
 
 export type LoginInput = z.infer<typeof loginSchema>
 
@@ -82,5 +97,7 @@ export const {schemas: userSchema, $ref } = buildJsonSchemas({
     updatePasswordSchema,
     loginSchema,
     loginResponseSchema,
-    responseOkSchema
+    responseOkSchema,
+    activateSchema,
+    emailSchema
 }, {$id:'User_Schemas'})
