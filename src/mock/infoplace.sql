@@ -2,7 +2,9 @@
     "html_attributions": [],
     "result": {
         "id": 0,
-        "favorite": false,
+        "isfavorite": false,
+        "id_comments": {1,2},
+        "rating": 9.5,
         "formatted_address": "Frente a la, Rotonda de San Sebastián 214, San Sebastián, San José, Costa Rica",
         "formatted_phone_number": "800-800-0722",
         "name": "Walmart",

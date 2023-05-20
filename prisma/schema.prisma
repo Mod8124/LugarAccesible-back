@@ -30,7 +30,7 @@ model Place {
   id_google_place String @unique
   rating Decimal?
   commets Comment[]
-  favorites Favorite[]
+  favoritos Favorite[]
 }
 
 model Comment {
@@ -44,12 +44,12 @@ model Comment {
   id_commet_response Int?
 }
 
-const Favorite {
+model Favorite {
   id Int @id @default(autoincrement())
   place Place @relation(fields: [id_place], references: [id])
   id_place Int
   user User @relation(fields: [userId], references: [id])
   userId Int
-  status Boolean @default(true)
+  isfavorite Boolean @default(true)
 }
 
