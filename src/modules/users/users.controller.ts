@@ -101,7 +101,7 @@ export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: Fa
   if (!user)
     return res.code(400).send({
       status: 'error',
-      msg: 'User ID not found in request',
+      msg: 'User not found in request',
     });
   res.code(200).send({
     status: 'ok',

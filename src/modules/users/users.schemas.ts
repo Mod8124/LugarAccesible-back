@@ -33,6 +33,19 @@ const loginSuccess = z.object({
   }),
 });
 
+// update
+const bodyUpdate = z.object({
+  name: z.string(),
+  email: z.string(),
+  avatar: z.string(),
+});
+
+const updateSuccess = z.object({
+  status: z.string(),
+  msg: z.string(),
+  data: bodyUpdate,
+});
+
 export const { schemas: userSchema, $ref } = buildJsonSchemas(
   {
     bodyRegister,
@@ -40,6 +53,8 @@ export const { schemas: userSchema, $ref } = buildJsonSchemas(
     registerSuccess,
     bodyLogin,
     loginSuccess,
+    bodyUpdate,
+    updateSuccess,
   },
   { $id: 'User_Schemas' },
 );

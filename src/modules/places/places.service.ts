@@ -1,5 +1,6 @@
 import { GOOGLE_MAPS_KEY } from '../../../config';
 import { getWeelChair, filteredTypes } from '../search/search.service';
+import Favorite from '../../db/models/favoriteModel';
 
 export type Location = {
   lat: string;
@@ -41,11 +42,35 @@ export async function getPlaces(location: Location) {
   return result;
 }
 
-export const getDetails = async (place_id: string) => {
+interface IFavorite {
+  _id: string;
+  user_id: string;
+  favorites: {
+    place_id: string;
+    name: string;
+    location: {
+      lat: string;
+      lng: string;
+    };
+  }[];
+}
+
+const isFavorite = async (_id: string, place_id: string): Promise<boolean> => {
+  try {
+    const favorite = await Favorite.findOne({ user_id: _id, 'favorites.place_id': place_id });
+    return !!favorite; // Return true if favorite exists, false otherwise
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+};
+
+export const getDetails = async (place_id: string, user_id?: string) => {
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${GOOGLE_MAPS_KEY}&fields=formatted_address,formatted_phone_number,geometry,name,international_phone_number,opening_hours,photos,place_id,rating,reviews,user_ratings_total,website,types,wheelchair_accessible_entrance`;
 
   const response = await fetch(url);
   const data = await response.json();
+
   const newData = {
     formatted_address: data.result.formatted_address,
     formatted_phone_number: data.result.formatted_phone_number,
@@ -64,6 +89,7 @@ export const getDetails = async (place_id: string) => {
       'wheelchair_accessible_entrance' in data.result
         ? data.result.wheelchair_accessible_entrance
         : false,
+    isFavorite: user_id ? await isFavorite(user_id, place_id) : false,
   };
 
   return newData;

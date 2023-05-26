@@ -42,6 +42,11 @@ export async function UserRoutes(app: FastifyInstance) {
       schema: {
         tags: ['User'],
         summary: 'update the user',
+        body: $ref('bodyUpdate'),
+        response: {
+          200: $ref('updateSuccess'),
+          400: $ref('registerFailed'),
+        },
       },
     },
     updateUser,

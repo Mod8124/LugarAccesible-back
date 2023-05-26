@@ -24,9 +24,20 @@ export async function getDetailHandler(
   reply: FastifyReply,
 ) {
   const { place_id } = request.query;
+  const { _id } = request.user || {};
+
   if (!place_id) {
     return reply.code(404).send({ status: 'failed', error: 'place_id is required' });
   }
+
+  if (_id) {
+    const result = await getDetails(place_id, _id.toString());
+    return reply.code(200).send({
+      status: 'success',
+      data: [result],
+    });
+  }
+
   const result = await getDetails(place_id);
   reply.code(200).send({
     status: 'success',

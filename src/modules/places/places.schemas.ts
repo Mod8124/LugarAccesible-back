@@ -99,6 +99,7 @@ const responseSuccessDetail = z.object({
       website: z.string().optional(),
       types: z.array(z.string()).optional(),
       wheelchair_accessible_entrance: z.boolean().optional(),
+      isFavorite: z.boolean().optional(),
     }),
   ),
 });
