@@ -1,7 +1,6 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { IUser, TLoginUser, IUpdate } from './users.service';
 import { register, login, update } from './users.service';
-import { FastifyJWT } from '@fastify/jwt';
 
 interface IRegisterBody extends IUser {
   [key: string]: string;
@@ -56,14 +55,6 @@ export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: 
     return;
   }
   const user = await login(req.body);
-  // if (!user.isConfirm) {
-  //   return res
-  //     .code(400)
-  //     .send({
-  //       status: 'failed',
-  //       msg: 'Cuenta pendiente. ¡Por favor verifica tu correo electrónico!',
-  //     });
-  // }
   const token = await res.jwtSign({ _id: user._id });
   res.code(200).send({
     status: 'ok',

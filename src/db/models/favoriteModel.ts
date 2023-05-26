@@ -1,7 +1,7 @@
 import mongoose, { model } from 'mongoose';
 const schema = mongoose.Schema;
 
-const favoritesSchema = new schema({
+const favoriteSchema = new schema({
   user_id: {
     type: String,
     required: [true, 'user is required'],
@@ -13,6 +13,6 @@ const favoritesSchema = new schema({
   },
 });
 
-const Favorite = model('Favorite', favoritesSchema);
+const Favorite = model('Favorite', favoriteSchema);
 
 export default Favorite;
