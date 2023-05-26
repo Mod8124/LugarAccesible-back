@@ -1,5 +1,5 @@
-import { string, z } from "zod";
-import { buildJsonSchemas } from "fastify-zod";
+import { z } from 'zod';
+import { buildJsonSchemas } from 'fastify-zod';
 
 const query = z.object({
   lat: z.string(),
@@ -9,31 +9,36 @@ const query = z.object({
 });
 
 const ResponseSuccess = z.object({
-    status:z.string(),
-    data: z.array(z.object({
-    business_status: z.string(),
-    formatted_address: z.string(),
-    name: z.string(),
-    place_id: z.string(),
-   types: z.array(z.string()),
-   location: z.object({
-      lat: z.number(),
-      lng: z.number()
-   }),
-    opening_hours: z.object({
-      open_now: z.boolean()
+  status: z.string(),
+  data: z.array(
+    z.object({
+      business_status: z.string(),
+      formatted_address: z.string(),
+      name: z.string(),
+      place_id: z.string(),
+      types: z.array(z.string()),
+      location: z.object({
+        lat: z.number(),
+        lng: z.number(),
+      }),
+      opening_hours: z.object({
+        open_now: z.boolean(),
+      }),
+      wheelchair_accessible_entrance: z.boolean(),
     }),
-    wheelchair_accessible_entrance: z.boolean()
-    }))
+  ),
 });
 
 const ResponseFailed = z.object({
-      status: z.string(),
-      message: z.string(),
-})
+  status: z.string(),
+  message: z.string(),
+});
 
-export const {schemas: searchSchema, $ref } = buildJsonSchemas({
+export const { schemas: searchSchema, $ref } = buildJsonSchemas(
+  {
     query,
     ResponseSuccess,
-    ResponseFailed
-}, {$id:'Search_Schemas'})
+    ResponseFailed,
+  },
+  { $id: 'Search_Schemas' },
+);
