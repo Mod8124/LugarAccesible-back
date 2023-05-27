@@ -88,7 +88,7 @@ userSchema.statics.register = async function ({ name, email, password }) {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const imgavatar = `https://ui-avatars.com/api/?name=${name}&background=random&rounded=true&color=fff`;
+  const imgavatar = `https://ui-avatars.com/api/?name=${name}&background=002966&rounded=true&color=fff`;
 
   const user = await this.create({ name, email, password: hash, avatar: imgavatar });
 
