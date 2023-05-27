@@ -62,7 +62,7 @@ userSchema.statics.register = async function ({ name, email, password }) {
   }
 
   if (!/\d/.test(password)) {
-    throw new Error('La contraseña debe tener un numbero');
+    throw new Error('La contraseña debe tener un numero');
   }
 
   if (!/[A-Z]/.test(password)) {
