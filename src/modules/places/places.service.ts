@@ -1,6 +1,7 @@
 import { GOOGLE_MAPS_KEY } from '../../../config';
 import { getWeelChair, filteredTypes } from '../search/search.service';
 import Favorite from '../../db/models/favoriteModel';
+import { getRating, getComments } from '../comments/comments.service';
 
 export type Location = {
   lat: string;
@@ -56,17 +57,12 @@ interface IFavorite {
 }
 
 const isFavorite = async (_id: string, place_id: string): Promise<boolean> => {
-  try {
-    const favorite = await Favorite.findOne({ user_id: _id, 'favorites.place_id': place_id });
-    return !!favorite; // Return true if favorite exists, false otherwise
-  } catch (error) {
-    console.error('Error:', error);
-    throw error;
-  }
+  const favorite = await Favorite.findOne({ user_id: _id, 'favorites.place_id': place_id });
+  return !!favorite;
 };
 
 export const getDetails = async (place_id: string, user_id?: string) => {
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${GOOGLE_MAPS_KEY}&fields=formatted_address,formatted_phone_number,geometry,name,international_phone_number,opening_hours,photos,place_id,rating,reviews,user_ratings_total,website,types,wheelchair_accessible_entrance`;
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${GOOGLE_MAPS_KEY}&fields=formatted_address,formatted_phone_number,geometry,name,international_phone_number,opening_hours,photos,place_id,website,types,wheelchair_accessible_entrance`;
 
   const response = await fetch(url);
   const data = await response.json();
@@ -74,15 +70,12 @@ export const getDetails = async (place_id: string, user_id?: string) => {
   const newData = {
     formatted_address: data.result.formatted_address,
     formatted_phone_number: data.result.formatted_phone_number,
-    geometry: data.result.geometry,
+    location: data.result.geometry.location,
     name: data.result.name,
     international_phone_number: data.result.international_phone_number,
     opening_hours: data.result.opening_hours,
     photos: data.result.photos,
     place_id: data.result.place_id,
-    rating: data.result.rating,
-    reviews: data.result.reviews,
-    user_ratings_total: data.result.user_ratings_total,
     website: data.result.website,
     types: data.result.types.filter(filteredTypes),
     wheelchair_accessible_entrance:

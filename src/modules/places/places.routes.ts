@@ -21,6 +21,7 @@ export async function PlaceRoutes(app: FastifyInstance) {
   app.get(
     '/detail',
     {
+      preHandler: [app.hasToken],
       schema: {
         tags: ['Place'],
         querystring: $placeRef('queryDetail'),

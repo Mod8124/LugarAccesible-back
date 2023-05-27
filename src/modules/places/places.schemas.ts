@@ -29,24 +29,10 @@ const responseSuccessDetail = z.object({
     z.object({
       formatted_address: z.string().optional(),
       formatted_phone_number: z.string().optional(),
-      geometry: z
-        .object({
-          location: z.object({
-            lat: z.number(),
-            lng: z.number(),
-          }),
-          viewport: z.object({
-            northeast: z.object({
-              lat: z.number(),
-              lng: z.number(),
-            }),
-            southwest: z.object({
-              lat: z.number(),
-              lng: z.number(),
-            }),
-          }),
-        })
-        .optional(),
+      location: z.object({
+        lat: z.string(),
+        lng: z.string(),
+      }),
       name: z.string().optional(),
       international_phone_number: z.string().optional(),
       opening_hours: z
@@ -54,50 +40,38 @@ const responseSuccessDetail = z.object({
           open_now: z.boolean().optional(),
           periods: z.array(
             z.object({
-              close: z.object({
-                day: z.number(),
-                time: z.string(),
-              }),
-              open: z.object({
-                day: z.number(),
-                time: z.string(),
-              }),
+              close: z
+                .object({
+                  day: z.number(),
+                  time: z.string(),
+                })
+                .optional(),
+              open: z
+                .object({
+                  day: z.number(),
+                  time: z.string(),
+                })
+                .optional(),
             }),
           ),
-          weekday_text: z.array(z.string()),
+          weekday_text: z.array(z.string().optional()),
         })
         .optional(),
       photos: z
         .array(
-          z.object({
-            height: z.number(),
-            html_attributions: z.array(z.string()),
-            photo_reference: z.string(),
-            width: z.number(),
-          }),
+          z
+            .object({
+              height: z.number(),
+              html_attributions: z.array(z.string()),
+              photo_reference: z.string(),
+              width: z.number(),
+            })
+            .optional(),
         )
         .optional(),
       place_id: z.string().optional(),
-      rating: z.number().optional(),
-      reviews: z
-        .array(
-          z.object({
-            author_name: z.string(),
-            author_url: z.string(),
-            language: z.string(),
-            original_language: z.string(),
-            profile_photo_url: z.string(),
-            rating: z.number(),
-            relative_time_description: z.string(),
-            text: z.string(),
-            time: z.number(),
-            translated: z.boolean(),
-          }),
-        )
-        .optional(),
-      user_ratings_total: z.number().optional(),
       website: z.string().optional(),
-      types: z.array(z.string()).optional(),
+      types: z.array(z.string().optional()).optional(),
       wheelchair_accessible_entrance: z.boolean().optional(),
       isFavorite: z.boolean().optional(),
     }),

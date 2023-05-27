@@ -12,14 +12,17 @@ import { UserRoutes } from './modules/users/users.routes';
 import PlaceRoutes from './modules/places/places.routes';
 import SearchRoutes from './modules/search/search.routes';
 import { FeedbackRoutes } from './modules/feedback/feedback.routes';
+import { commentRoutes } from './modules/comments/comments.routes';
 
 import { userSchema } from './modules/users/users.schemas';
 import { placeSchema } from './modules/places/places.schemas';
 import { searchSchema } from './modules/search/search.schema';
 import { feedbackSchema } from './modules/feedback/feedback.schema';
+import { commentSchema } from './modules/comments/comments.schemas';
 declare module 'fastify' {
   export interface FastifyInstance {
     authenticate: any;
+    hasToken: any;
   }
 }
 declare module '@fastify/jwt' {
@@ -38,7 +41,7 @@ export function buildApp() {
   app.register(fastifyJwt, {
     secret: JWT_SECRET,
     sign: {
-      expiresIn: '2h', // <== Token expires in 10 minutes
+      expiresIn: '10h', // <== Token expires in 10 hours
     },
   });
 
@@ -80,8 +83,22 @@ export function buildApp() {
     }
   });
 
+  app.decorate('hasToken', async (request: FastifyRequest, reply: FastifyReply, done: any) => {
+    try {
+      await request.jwtVerify();
+    } catch (e) {
+      if (e) done();
+    }
+  });
+
   //::Register Schemas
-  for (const schema of [...userSchema, ...placeSchema, ...searchSchema, ...feedbackSchema]) {
+  for (const schema of [
+    ...userSchema,
+    ...placeSchema,
+    ...searchSchema,
+    ...feedbackSchema,
+    ...commentSchema,
+  ]) {
     app.addSchema(schema);
   }
 
@@ -89,12 +106,19 @@ export function buildApp() {
   const base = '/api/v1/';
   app.register(UserRoutes, { prefix: base + 'user' });
   app.register(PlaceRoutes, { prefix: base + 'place' });
-  // app.register(commentRoutes, {prefix: '/comments'})
+  app.register(commentRoutes, { prefix: base + 'comment' });
   app.register(SearchRoutes, { prefix: base + 'search' });
   app.register(FeedbackRoutes, { prefix: base + 'feedback' });
 
   app.get('/', async function (req, res) {
     res.redirect('/docs');
+  });
+
+  // handle global err
+  app.setErrorHandler(function (error, request, reply) {
+    if (error) {
+      reply.code(400).send({ status: 'failed', msg: error.message });
+    }
   });
 
   return app;

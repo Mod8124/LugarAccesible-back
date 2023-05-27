@@ -27,7 +27,13 @@ export const registerUser = async (
     const missingFieldsMsg = missingFields.join(', ');
     res.status(400).send({
       status: 'failed',
-      msg: `${missingFieldsMsg} ${missingFields.length > 1 ? 'son' : 'es'} requerido`,
+      msg: `${
+        missingFieldsMsg === 'name'
+          ? 'Nombre'
+          : missingFieldsMsg === 'password'
+          ? 'Contraseña'
+          : 'Email'
+      } ${missingFields.length > 1 ? 'son' : 'es'} requerido`,
     });
     return;
   }
@@ -50,7 +56,9 @@ export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: 
     const missingFieldsMsg = missingFields.join(', ');
     res.status(400).send({
       status: 'failed',
-      msg: `${missingFieldsMsg} ${missingFields.length > 1 ? 'son' : 'es'} requerido`,
+      msg: `${missingFieldsMsg === 'password' ? 'Contraseña' : 'Email'} ${
+        missingFields.length > 1 ? 'son' : 'es'
+      } requerido`,
     });
     return;
   }
@@ -58,7 +66,7 @@ export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: 
   const token = await res.jwtSign({ _id: user._id });
   res.code(200).send({
     status: 'ok',
-    msg: 'sucessfull',
+    msg: 'sucessful',
     data: {
       accesstoken: token,
       name: user.name,
@@ -96,7 +104,7 @@ export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: Fa
     });
   res.code(200).send({
     status: 'ok',
-    msg: 'sucessfull',
+    msg: 'Usuario Actualizado',
     data: {
       name: user.name,
       email: user.email,

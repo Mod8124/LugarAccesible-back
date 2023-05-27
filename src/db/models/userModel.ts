@@ -45,9 +45,9 @@ const userSchema = new schema<IUserSchema, UserModel>({
 userSchema.statics.register = async function ({ name, email, password }) {
   // validation
   if (!email && !password) {
-    throw Error('Email & Password debe ser rellenados');
+    throw Error('Email & Contraseña debe ser rellenados');
   } else if (!email || !password) {
-    const fieldName = !email ? 'Email' : 'Password';
+    const fieldName = !email ? 'Email' : 'Contraseña';
     throw Error(`${fieldName} debe ser rellenado`);
   }
 
@@ -98,9 +98,9 @@ userSchema.statics.register = async function ({ name, email, password }) {
 userSchema.statics.login = async function ({ email, password }) {
   // validation
   if (!email && !password) {
-    throw Error('Email & Password son requeridos');
+    throw Error('Email & Contraseña son requeridos');
   } else if (!email || !password) {
-    const fieldName = !email ? 'Email' : 'Password';
+    const fieldName = !email ? 'Email' : 'Contraseña';
     throw Error(`${fieldName} es requerido`);
   }
 

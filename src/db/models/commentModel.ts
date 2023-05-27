@@ -4,11 +4,11 @@ const schema = mongoose.Schema;
 const commentSchema = new schema({
   place_id: {
     type: String,
-    required: [true, 'user is required'],
+    required: [true, 'place_id is required'],
     unique: true,
   },
   comments: {
-    type: [{ user_id: String, author: String, raking: Number, text: String }],
+    type: [{ user_id: String, author: String, rating: Number, text: String }],
     required: false,
   },
 });
