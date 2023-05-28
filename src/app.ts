@@ -19,6 +19,9 @@ import { placeSchema } from './modules/places/places.schemas';
 import { searchSchema } from './modules/search/search.schema';
 import { feedbackSchema } from './modules/feedback/feedback.schema';
 import { commentSchema } from './modules/comments/comments.schemas';
+
+const path = require('path')
+
 declare module 'fastify' {
   export interface FastifyInstance {
     authenticate: any;
@@ -120,6 +123,10 @@ export function buildApp() {
       reply.code(400).send({ status: 'failed', msg: error.message });
     }
   });
+
+  app.register(require('@fastify/static'), {
+    root: path.join(__dirname, 'front')
+  })
 
   return app;
 }
