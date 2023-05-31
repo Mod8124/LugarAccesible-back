@@ -1,25 +1,34 @@
-## Initialize Project
-**Step 1**: Install dependencies.
+<div align="center">
 
-```$ npm install```
+<img src="/public/assets/logo/logo.svg" width="180"/>
 
-**Step 2**: Run docker-compose for Postgresql and pgadmin4.
+> ~
+>
+> <p>API that provide accessibility information based on location for people with reduced mobility.</p>
+> <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white">
+> <img src="https://img.shields.io/badge/fastify-%23000000.svg?style=for-the-badge&logo=fastify&logoColor=white">
+> <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white">
+> <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white">
+> <img src="https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white">
+> <br/>
+> ~
 
-```$ docker-compose up -d```
+</div>
 
-**Step 3**: Migrate prisma models.
+<br>
 
-```$ npx prisma migrate dev --name init```
+## 📑Project Overview
 
-**Step 4**: Run Node scripts.
+**This Version** is mine if you want to see the real version you can check the original repo **[equipo4-ed4-backend](https://github.com/lemcok/equipo4-ed4-backend/tree/main)**
 
-```$ npm start``` &nbsp; &nbsp; &nbsp; &nbsp; → Run in production.
+LugarAccesibleAPI is focused on accessibility in terms on wheelchair available, which allows people with reduced mobility to obtain information about the accessibility spaces based on their location. This API-based service provides information on wheelchair-accessible spaces based on users' locations, empowering individuals with reduced mobility to easily find and access inclusive venues such as restaurants, hotels, parks, and museums.
 
-```$ npm run dev``` &nbsp; &nbsp; → Run in mode development.
+## 📝Features
 
-```$ npm run build``` → Build the project before deployment.
-
-**Step 5**: Check if everything has gone well. In your browser type the following urls. 
-> http://localhost:4000 → expected → `{"message": "Welcome to our api"}`
-
-> http://localhost:4000/users → expected → `[]`
+- Search: Search for wheelchair-accessible spaces based on their location
+- Location Detail: Provides detailed information about each accessible location
+- Location: Get the 20 places in based on geolocation
+- Comments: Leave comments, feedback, and reviews about their experiences at specific accessible locations
+- Authentication: Create accounts, log in, and manage their profiles, allowing for personalized experiences
+- Favorites: Favorite accessible locations for easy access in the future, creating a personalized list of preferred venues
+- Multilingual Support:(working) The platform supports multiple languages, enabling users from different regions to access information in their preferred language
