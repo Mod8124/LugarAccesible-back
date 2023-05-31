@@ -23,12 +23,4 @@
 
 LugarAccesibleAPI is focused on accessibility in terms on wheelchair available, which allows people with reduced mobility to obtain information about the accessibility spaces based on their location. This API-based service provides information on wheelchair-accessible spaces based on users' locations, empowering individuals with reduced mobility to easily find and access inclusive venues such as restaurants, hotels, and etc
 
-## 📝Features
 
-- Search: Search for wheelchair-accessible spaces based on their location
-- Location Detail: Provides detailed information about each accessible location
-- Location: Get the 20 places in based on geolocation
-- Comments: Leave comments, feedback, and reviews about their experiences at specific accessible locations
-- Authentication: Create accounts, log in, and manage their profiles, allowing for personalized experiences
-- Favorites: Favorite accessible locations for easy access in the future, creating a personalized list of preferred 
-- Multilingual Support:(working) The platform supports multiple languages, enabling users from different regions to access information in their preferred language
