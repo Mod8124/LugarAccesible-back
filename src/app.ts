@@ -103,9 +103,8 @@ export function buildApp() {
   app.register(SearchRoutes, { prefix: base + 'search' });
   app.register(FeedbackRoutes, { prefix: base + 'feedback' });
 
-  app.post('/', async function (req, res) {
-    const data = await req.file();
-    res.send('hola');
+  app.get('/', async function (req, res) {
+    res.redirect('/docs');
   });
 
   // handle global err

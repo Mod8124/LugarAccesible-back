@@ -47,7 +47,9 @@ export const registerUser = async (
     confirmCode: user.confirmCode ? user.confirmCode : '',
   });
 
-  res.code(201).send({ status: 'ok', msg: 'Usuario creado, Se envió  un correo de validación' });
+  res
+    .code(201)
+    .send({ status: 'ok', msg: 'Usuario registrado, Se envió  un correo de validación' });
 };
 
 export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: FastifyReply) => {
@@ -77,7 +79,7 @@ export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: 
       name: user.name,
       confirmCode: user.confirmCode ? user.confirmCode : '',
     });
-    return res.code(201).send({
+    return res.code(400).send({
       status: 'ok',
       msg: 'Por favor verifique su cuenta, Se envió un correo de validación',
     });
