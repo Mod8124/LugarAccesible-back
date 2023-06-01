@@ -1,20 +1,23 @@
 import mongoose, { model, Model } from 'mongoose';
-const schema = mongoose.Schema;
+import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 import validator from 'validator';
+const schema = mongoose.Schema;
 
 export interface IUserSchema {
   _id: string;
   name: string;
-  isConfirm: boolean;
   email: string;
   avatar: string;
   password: string;
+  isConfirm: boolean;
+  confirmCode: string | null;
 }
 
 export interface UserModel extends Model<IUserSchema> {
   register(user: { name: string; email: string; password: string }): IUserSchema;
   login(user: { email: string; password: string }): IUserSchema;
+  verify(confirmCode: string): IUserSchema;
 }
 
 const userSchema = new schema<IUserSchema, UserModel>({
@@ -35,6 +38,10 @@ const userSchema = new schema<IUserSchema, UserModel>({
     type: Boolean,
     required: false,
     default: false,
+  },
+  confirmCode: {
+    type: String,
+    required: false,
   },
   avatar: {
     type: String,
@@ -90,7 +97,15 @@ userSchema.statics.register = async function ({ name, email, password }) {
 
   const imgavatar = `https://ui-avatars.com/api/?name=${name}&background=002966&rounded=true&color=fff`;
 
-  const user = await this.create({ name, email, password: hash, avatar: imgavatar });
+  const cryptoToken = crypto.randomBytes(18).toString('hex');
+
+  const user = await this.create({
+    name,
+    email,
+    password: hash,
+    avatar: imgavatar,
+    confirmCode: cryptoToken,
+  });
 
   return user;
 };
@@ -118,6 +133,19 @@ userSchema.statics.login = async function ({ email, password }) {
   if (!match) {
     throw Error('La contraseña es incorrecta');
   }
+
+  return user;
+};
+
+userSchema.statics.verify = async function (confirmCode: string) {
+  const exists = await this.findOne({ confirmCode });
+
+  if (!exists) throw new Error('El codigo de confirmacion no existe');
+
+  exists.confirmCode = null;
+  exists.isConfirm = true;
+
+  const user = await exists.save();
 
   return user;
 };

@@ -28,3 +28,8 @@ export const update = async (id: string, object: IUpdate) => {
   const updatedUser = await User.findByIdAndUpdate(id, object, { new: true });
   return updatedUser;
 };
+
+export const verify = async (confirmCode: string) => {
+  const updateUser = await User.verify(confirmCode);
+  return updateUser;
+};

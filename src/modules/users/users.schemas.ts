@@ -46,6 +46,11 @@ const updateSuccess = z.object({
   data: bodyUpdate,
 });
 
+// verify
+const paramsVerify = z.object({
+  code: z.string(),
+});
+
 export const { schemas: userSchema, $ref } = buildJsonSchemas(
   {
     bodyRegister,
@@ -55,6 +60,7 @@ export const { schemas: userSchema, $ref } = buildJsonSchemas(
     loginSuccess,
     bodyUpdate,
     updateSuccess,
+    paramsVerify,
   },
   { $id: 'User_Schemas' },
 );
