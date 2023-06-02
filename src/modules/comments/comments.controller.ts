@@ -123,14 +123,14 @@ export const editCommentByPlaceId = async (
 };
 
 export const deleteCommentByPlace_id = async (
-  req: FastifyRequest<{ Body: { [key: string]: string; place_id: string; id: string } }>,
+  req: FastifyRequest<{ Params: { [key: string]: string; place_id: string; id: string } }>,
   res: FastifyReply,
 ) => {
   const requiredFields = ['place_id', 'id'];
   const missingFields = [];
 
   for (const field of requiredFields) {
-    if (!req.body[field]) {
+    if (!req.params[field]) {
       missingFields.push(field);
     }
   }
@@ -145,8 +145,8 @@ export const deleteCommentByPlace_id = async (
   }
   const { _id } = req.user;
   const [comments, rating] = await Promise.all([
-    deleteComment(req.body, _id.toString()),
-    getRating(req.body.place_id),
+    deleteComment(req.params, _id.toString()),
+    getRating(req.params.place_id),
   ]);
   res.code(200).send({
     status: 'ok',

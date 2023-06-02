@@ -47,7 +47,7 @@ const bodyEditPostComment = z.object({
   id: z.string(),
 });
 
-const bodyDeleteComment = z.object({
+const paramsDeleteComment = z.object({
   place_id: z.string(),
   id: z.string(),
 });
@@ -59,7 +59,7 @@ export const { schemas: commentSchema, $ref } = buildJsonSchemas(
     responseFailedGetComments,
     bodyPostComment,
     bodyEditPostComment,
-    bodyDeleteComment,
+    paramsDeleteComment,
   },
   { $id: 'Comment_Schemas' },
 );

@@ -87,7 +87,7 @@ export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: 
   const token = await res.jwtSign({ _id: user._id });
   res.code(200).send({
     status: 'ok',
-    msg: 'sucessful',
+    msg: 'successful',
     data: {
       accesstoken: token,
       name: user.name,
