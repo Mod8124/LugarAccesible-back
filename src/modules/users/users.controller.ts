@@ -100,13 +100,11 @@ export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: 
 export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: FastifyReply) => {
   const requiredFields = ['email', 'name', 'avatar'];
   const missingFields = [];
-
   for (const field of requiredFields) {
     if (!req.body[field]) {
       missingFields.push(field);
     }
   }
-
   if (missingFields.length > 0) {
     const missingFieldsMsg = missingFields.join(', ');
     res.status(400).send({
@@ -115,7 +113,6 @@ export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: Fa
     });
     return;
   }
-
   const { _id } = req.user;
   const user = await update(_id.toString(), req.body);
   if (!user)

@@ -38,12 +38,18 @@ const bodyUpdate = z.object({
   name: z.string(),
   email: z.string(),
   avatar: z.string(),
+  password: z.string().optional(),
+  newPassword: z.string().optional(),
 });
 
 const updateSuccess = z.object({
   status: z.string(),
   msg: z.string(),
-  data: bodyUpdate,
+  data: z.object({
+    name: z.string(),
+    email: z.string(),
+    avatar: z.string(),
+  }),
 });
 
 // verify
