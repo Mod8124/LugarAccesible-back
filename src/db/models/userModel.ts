@@ -28,6 +28,7 @@ export interface UserModel extends Model<IUserSchema> {
       newPassword?: string;
     },
   ): IUserSchema;
+  updatePassword(id: string, user: { currentPassword: string; newPassword: string }): IUserSchema;
 }
 
 const userSchema = new schema<IUserSchema, UserModel>({
@@ -170,33 +171,48 @@ userSchema.statics.update = async function (id, { email, name, avatar, password,
 
   const user = await this.findById({ _id: id });
 
+  if (!user) throw Error('El usuario no existe');
+
   if (user?.email !== email) {
     const exists = await this.findOne({ email });
 
     if (exists) throw Error('El email ya esta en uso');
+    const cryptoToken = crypto.randomBytes(18).toString('hex');
+    user.isConfirm = false;
+    user.confirmCode = cryptoToken;
   }
 
-  if (!user) throw Error('El usuario no exister');
+  if (!user) throw Error('El usuario no existe');
 
   user.name = name;
   user.email = email;
   user.avatar = avatar;
 
-  if (newPassword) {
-    if (!password) throw Error('Debes proporcionar la contraseña anterior');
+  const updateUser = await user.save();
 
-    // Validate the old password
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+  return updateUser;
+};
 
-    if (!isPasswordValid) throw Error('La contraseña anterior es incorrecta');
+userSchema.statics.updatePassword = async function (id, { currentPassword, newPassword }) {
+  const user = await this.findById({ _id: id });
 
-    // check if is strong
-    validatePassword(newPassword);
+  if (!user) throw Error('El usuario no existe');
 
-    // Generate a new password hash
-    const newPasswordHash = await bcrypt.hash(newPassword, 10);
-    user.password = newPasswordHash;
-  }
+  if (!currentPassword) throw Error('Debes proporcionar la contraseña actual ');
+
+  if (!newPassword) throw Error('Debes proporcionar la contraseña nueva');
+
+  // Validate the old password
+  const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+
+  if (!isPasswordValid) throw Error('Contraseña actual equivocada');
+
+  // check if is strong
+  validatePassword(newPassword);
+
+  // Generate a new password hash
+  const newPasswordHash = await bcrypt.hash(newPassword, 10);
+  user.password = newPasswordHash;
 
   const updateUser = await user.save();
 

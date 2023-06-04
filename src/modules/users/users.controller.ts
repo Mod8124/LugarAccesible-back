@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { IUser, TLoginUser, IUpdate } from './users.service';
-import { register, login, update, verify } from './users.service';
-import { sendVerificationMail } from '../../helpers/sendEmail';
+import { register, login, update, verify, updatePassword } from './users.service';
+import { sendVerificationMail, sendVerificationChangeMail } from '../../helpers/sendEmail';
 
 interface IRegisterBody extends IUser {
   [key: string]: string;
@@ -115,19 +115,53 @@ export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: Fa
   }
   const { _id } = req.user;
   const user = await update(_id.toString(), req.body);
-  if (!user)
-    return res.code(400).send({
-      status: 'error',
-      msg: 'User not found in request',
+
+  let message;
+
+  if (!user.isConfirm) {
+    await sendVerificationChangeMail({
+      email: user.email,
+      name: user.name,
+      confirmCode: user.confirmCode ? user.confirmCode : '',
     });
+    message = 'Usuario Actualizado, Se envió un correo de validación, verifícalo más tarde';
+  } else {
+    message = 'Usuario Actualizado';
+  }
+
   res.code(200).send({
     status: 'ok',
-    msg: 'Usuario Actualizado',
+    msg: message,
     data: {
       name: user.name,
       email: user.email,
       avatar: user.avatar,
     },
+  });
+};
+
+export const updatePasswordUser = async (
+  req: FastifyRequest<{ Body: { currentPassword: string; newPassword: string } }>,
+  res: FastifyReply,
+) => {
+  const { currentPassword, newPassword } = req.body;
+  if (!currentPassword) {
+    return res.status(400).send({
+      status: 'failed',
+      msg: 'La contraseña actual es requerida',
+    });
+  }
+  if (!newPassword) {
+    return res.status(400).send({
+      status: 'failed',
+      msg: 'La contraseña nueva es requerida',
+    });
+  }
+  const { _id } = req.user;
+  await updatePassword(_id.toString(), req.body);
+  res.code(200).send({
+    status: 'ok',
+    msg: 'Contraseña Actualizada',
   });
 };
 

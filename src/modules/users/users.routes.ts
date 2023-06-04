@@ -1,5 +1,11 @@
 import { type FastifyInstance } from 'fastify';
-import { registerUser, loginUser, updateUser, verifyUser } from './users.controller';
+import {
+  registerUser,
+  loginUser,
+  updateUser,
+  updatePasswordUser,
+  verifyUser,
+} from './users.controller';
 import { $ref } from './users.schemas';
 
 export async function UserRoutes(app: FastifyInstance) {
@@ -50,6 +56,23 @@ export async function UserRoutes(app: FastifyInstance) {
       },
     },
     updateUser,
+  );
+
+  app.post(
+    '/updatePassword',
+    {
+      preHandler: [app.authenticate],
+      schema: {
+        tags: ['User'],
+        summary: 'update password the user',
+        body: $ref('bodyUpdatePassword'),
+        response: {
+          200: $ref('registerFailed'),
+          400: $ref('registerFailed'),
+        },
+      },
+    },
+    updatePasswordUser,
   );
 
   app.get(

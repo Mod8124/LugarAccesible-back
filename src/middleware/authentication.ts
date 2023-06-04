@@ -8,13 +8,10 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
   }
 }
 
-export async function hasToken(request: FastifyRequest, reply: FastifyReply, done: () => void) {
+export async function hasToken(request: FastifyRequest, reply: FastifyReply, done: any) {
   try {
     await request.jwtVerify();
-  } catch (error) {
-    // If the token verification fails, you can perform additional actions here
-    // For example, you can log the error or perform some cleanup
+  } catch (e) {
+    if (e) done();
   }
-
-  done();
 }
