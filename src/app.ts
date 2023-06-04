@@ -13,13 +13,15 @@ import { UserRoutes } from './modules/users/users.routes';
 import PlaceRoutes from './modules/places/places.routes';
 import SearchRoutes from './modules/search/search.routes';
 import { FeedbackRoutes } from './modules/feedback/feedback.routes';
-import { commentRoutes } from './modules/comments/comments.routes';
+import { CommentRoutes } from './modules/comments/comments.routes';
+import { FavoritesRoutes } from './modules/favorites/favorites.routes';
 
 import { userSchema } from './modules/users/users.schemas';
 import { placeSchema } from './modules/places/places.schemas';
 import { searchSchema } from './modules/search/search.schema';
 import { feedbackSchema } from './modules/feedback/feedback.schema';
 import { commentSchema } from './modules/comments/comments.schemas';
+import { favoriteSchema } from './modules/favorites/favorites.schema';
 
 const path = require('path');
 
@@ -91,6 +93,7 @@ export function buildApp() {
     ...searchSchema,
     ...feedbackSchema,
     ...commentSchema,
+    ...favoriteSchema,
   ]) {
     app.addSchema(schema);
   }
@@ -99,9 +102,10 @@ export function buildApp() {
   const base = '/api/v1/';
   app.register(UserRoutes, { prefix: base + 'user' });
   app.register(PlaceRoutes, { prefix: base + 'place' });
-  app.register(commentRoutes, { prefix: base + 'comment' });
+  app.register(CommentRoutes, { prefix: base + 'comment' });
   app.register(SearchRoutes, { prefix: base + 'search' });
   app.register(FeedbackRoutes, { prefix: base + 'feedback' });
+  app.register(FavoritesRoutes, { prefix: base + 'favorite' });
 
   app.get('/', async function (req, res) {
     res.redirect('/docs');

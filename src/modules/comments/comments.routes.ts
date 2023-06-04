@@ -7,7 +7,7 @@ import {
 } from './comments.controller';
 import { $ref } from './comments.schemas';
 
-export async function commentRoutes(app: FastifyInstance) {
+export async function CommentRoutes(app: FastifyInstance) {
   app.get(
     '/',
     {

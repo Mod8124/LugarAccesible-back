@@ -12,8 +12,8 @@ const responseSuccessPlacesList = z.array(
     name: z.string(),
     types: z.array(z.string()),
     location: z.object({
-      lat: z.string(),
-      lng: z.string(),
+      lat: z.number(),
+      lng: z.number(),
     }),
     wheelchair_accessible_entrance: z.boolean(),
   }),
@@ -30,8 +30,8 @@ const responseSuccessDetail = z.object({
       formatted_address: z.string().optional(),
       formatted_phone_number: z.string().optional(),
       location: z.object({
-        lat: z.string(),
-        lng: z.string(),
+        lat: z.number(),
+        lng: z.number(),
       }),
       name: z.string().optional(),
       international_phone_number: z.string().optional(),

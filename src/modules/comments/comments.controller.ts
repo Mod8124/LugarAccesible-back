@@ -150,7 +150,7 @@ export const deleteCommentByPlace_id = async (
   ]);
   res.code(200).send({
     status: 'ok',
-    msg: 'succesfull delete',
+    msg: 'succesful delete',
     data: {
       rating,
       comments,
