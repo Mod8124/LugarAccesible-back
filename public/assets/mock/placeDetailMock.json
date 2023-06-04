@@ -1,0 +1,535 @@
+[
+  {
+    "address_components": [
+      {
+        "long_name": "Galapa",
+        "short_name": "Galapa",
+        "types": ["administrative_area_level_2", "political"]
+      },
+      {
+        "long_name": "Atl\u00e1ntico",
+        "short_name": "Atl\u00e1ntico",
+        "types": ["administrative_area_level_1", "political"]
+      },
+      {
+        "long_name": "Colombia",
+        "short_name": "CO",
+        "types": ["country", "political"]
+      },
+      {
+        "long_name": "082001",
+        "short_name": "082001",
+        "types": ["postal_code"]
+      }
+    ],
+    "adr_address": "KM 8 via la cordialidad, \u003cspan class=\"locality\"\u003eGalapa\u003c/span\u003e, \u003cspan class=\"region\"\u003eAtl\u00e1ntico\u003c/span\u003e, \u003cspan class=\"postal-code\"\u003e082001\u003c/span\u003e, \u003cspan class=\"country-name\"\u003eColombia\u003c/span\u003e",
+    "business_status": "OPERATIONAL",
+    "current_opening_hours": {
+      "open_now": true,
+      "periods": [
+        {
+          "close": {
+            "date": "2023-05-21",
+            "day": 0,
+            "time": "1730"
+          },
+          "open": {
+            "date": "2023-05-21",
+            "day": 0,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "date": "2023-05-22",
+            "day": 1,
+            "time": "1730"
+          },
+          "open": {
+            "date": "2023-05-22",
+            "day": 1,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "date": "2023-05-23",
+            "day": 2,
+            "time": "1730"
+          },
+          "open": {
+            "date": "2023-05-23",
+            "day": 2,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "date": "2023-05-24",
+            "day": 3,
+            "time": "1730"
+          },
+          "open": {
+            "date": "2023-05-24",
+            "day": 3,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "date": "2023-05-25",
+            "day": 4,
+            "time": "1730"
+          },
+          "open": {
+            "date": "2023-05-25",
+            "day": 4,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "date": "2023-05-26",
+            "day": 5,
+            "time": "1730"
+          },
+          "open": {
+            "date": "2023-05-26",
+            "day": 5,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "date": "2023-05-20",
+            "day": 6,
+            "time": "1730"
+          },
+          "open": {
+            "date": "2023-05-20",
+            "day": 6,
+            "time": "0900"
+          }
+        }
+      ],
+      "weekday_text": [
+        "lunes: 14:00\u201317:30",
+        "martes: 14:00\u201317:30",
+        "mi\u00e9rcoles: 14:00\u201317:30",
+        "jueves: 14:00\u201317:30",
+        "viernes: 9:00\u201317:30",
+        "s\u00e1bado: 9:00\u201317:30",
+        "domingo: 9:00\u201317:30"
+      ]
+    },
+    "editorial_summary": {
+      "language": "en",
+      "overview": "Eco-tourism attraction offering educational farm tours, animal encounters & a restaurant."
+    },
+    "formatted_address": "KM 8 via la cordialidad, Galapa, Atl\u00e1ntico, Colombia",
+    "formatted_phone_number": "300 2018129",
+    "geometry": {
+      "location": {
+        "lat": 10.8851868,
+        "lng": -74.8896008
+      },
+      "viewport": {
+        "northeast": {
+          "lat": 10.8865360802915,
+          "lng": -74.8882517697085
+        },
+        "southwest": {
+          "lat": 10.8838381197085,
+          "lng": -74.89094973029151
+        }
+      }
+    },
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/park-71.png",
+    "icon_background_color": "#4DB546",
+    "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/tree_pinlet",
+    "international_phone_number": "+57 300 2018129",
+    "name": "El Solar de Mao",
+    "opening_hours": {
+      "open_now": true,
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1730"
+          },
+          "open": {
+            "day": 0,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1730"
+          },
+          "open": {
+            "day": 1,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1730"
+          },
+          "open": {
+            "day": 2,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1730"
+          },
+          "open": {
+            "day": 3,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1730"
+          },
+          "open": {
+            "day": 4,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1730"
+          },
+          "open": {
+            "day": 5,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1730"
+          },
+          "open": {
+            "day": 6,
+            "time": "0900"
+          }
+        }
+      ],
+      "weekday_text": [
+        "lunes: 14:00\u201317:30",
+        "martes: 14:00\u201317:30",
+        "mi\u00e9rcoles: 14:00\u201317:30",
+        "jueves: 14:00\u201317:30",
+        "viernes: 9:00\u201317:30",
+        "s\u00e1bado: 9:00\u201317:30",
+        "domingo: 9:00\u201317:30"
+      ]
+    },
+    "photos": [
+      {
+        "height": 3648,
+        "html_attributions": [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/100219218334006566919\"\u003eEl Solar de Mao\u003c/a\u003e"
+        ],
+        "photo_reference": "AZose0lb38i72Ug1YftfId9e5g3KeKJPIcDbA0lmgVmkf1pPi0AIRMj1TQGCRkLyq0XHZi2456CgBFxnZdRGVMaxg8R3jv6OFp9z5UNKvje9DE6z8s00Fkz_vqPq2VplHhgkclLkQrm6VkrPg44WIwwkuTu_Rt3It5HTYzAybV9aluUzhMbK",
+        "width": 5246
+      },
+      {
+        "height": 3024,
+        "html_attributions": [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/115225823258323932815\"\u003eluciana mujica\u003c/a\u003e"
+        ],
+        "photo_reference": "AZose0mzywJQwePMyFh9wUZUbw0jpyMqnWzVB20-V-Ep2wt9S4rqRUS1efVWvcBYS0R_5WSst_HNj4f_1nV1Iq4RbJOrSkIMdWOYF0UwkSsDCfAtBmVRx3_Smf7lHkbPZniVxNF032DWhbP9Ya8_uMSR34IvzEh7m-F3U4ojJjWinVP1hvCO",
+        "width": 4032
+      },
+      {
+        "height": 2448,
+        "html_attributions": [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/113183772091217573900\"\u003eBayran Arrieta\u003c/a\u003e"
+        ],
+        "photo_reference": "AZose0l3q-EZqpOddV4fnT8kGxwYM9mKtvDZPaEdowtNMoJ89_d24hELSzSBD5_11RH6GPUF1geOdmhfcgXHdG0C7FUZiddImdvMHylVSfBcEP71HY8Lap1JwHl-4s_L4rih1zOC4xYzIn8bopiqjjU41sm-7o6SFog7OWktTsxCRMphWSbq",
+        "width": 3264
+      },
+      {
+        "height": 3072,
+        "html_attributions": [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/100798031040190512702\"\u003eAngie paola Romero Anaya\u003c/a\u003e"
+        ],
+        "photo_reference": "AZose0mUYJQnx_4NbWiBeWsiLOqqot16sYKE51lJtnU9dESuKuuascAt6Qt_I0dQkAPNeffnVGInn6aOLCDJEvWXzZY10ZAX6TYcVFJvmTUnFGUdZKL5At12fykEm3swLWrlMeiWZEYgR42DE77TYLByLuC6Z0Bal_ASl3nc_2pGNCC-9QGr",
+        "width": 4096
+      },
+      {
+        "height": 2976,
+        "html_attributions": [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/115174146674222180715\"\u003eAndrea Garcia\u003c/a\u003e"
+        ],
+        "photo_reference": "AZose0lqpGlg7Uhrn4dMzBmIW9UKm_9Q1sVkpa18QvefhGSiXjaPQeTHQtTUg47pv7tDOl5khmx09SBTNwjQ59wuzCc17ffl5d8GeGM8EuN3DnU2lvxacRaM6g6-EdxxTIY_KSPFCCGW--1rMers_3e4hjvP9ja9-JgcYc6kIbUytLi_smqC",
+        "width": 3968
+      },
+      {
+        "height": 2604,
+        "html_attributions": [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/107196543592034279800\"\u003ePamela Lozano\u003c/a\u003e"
+        ],
+        "photo_reference": "AZose0l_N2pkc50bIWYRLRUyGnOt9cwxoj4arieHQKsyYZr0OjThZMvhAEurAgJTf13ao2yXm8ddP88vYhcQuxhKb_nTDaa9oixBRd15G1-iRTx1tmtSeSFZ6_NJqHYIcBNWHsxxOgMcBNAtYY93UtUYPUo62NdupNN6-iSX0hsY3eD8cOiL",
+        "width": 4624
+      },
+      {
+        "height": 4632,
+        "html_attributions": [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/117275488950946173621\"\u003eLUIS FERNANDO MARRUGO CASTRO\u003c/a\u003e"
+        ],
+        "photo_reference": "AZose0krH0C1TPY_0nL-O7umXMQtKPZMmCr-3g4W9nnecGD0eCDh_0qOLMNboKHTm1YVw650FG4F_CXTxuIVMnyu0qXMUpja-sk30dxMJ6ZEq4lc87iqk9hVvWJq6T-ggBdhBewaAh461FxGKn7vtFXJDshRkuPoJZyuqJ4PFAlADxM7dkvM",
+        "width": 3474
+      },
+      {
+        "height": 3072,
+        "html_attributions": [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/113206800765314366478\"\u003eLidizeth trillos bejarano\u003c/a\u003e"
+        ],
+        "photo_reference": "AZose0mrdFUuRsn5ZgwbGY68-94BESGfShDNPTtV97iYbA6vmqbGgACojVlS29oex2ARuFcoNqmcqXxLNhpzSk5kbF_Wxz4vWreboRuEJf09r9Kb2c3Zs8Jbg_6-gMo_hgFPdy7ThTJmEj6zE_Q6JFYoobdH5gPNkZ9VOPlAkiySaNXUOPhN",
+        "width": 4080
+      },
+      {
+        "height": 2268,
+        "html_attributions": [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/105082688131714895700\"\u003eAlvaro Ovalle\u003c/a\u003e"
+        ],
+        "photo_reference": "AZose0mKyUi4HIqlz_UlVf_0GcsiI-lJOsy8b6LUdzU3yeKdUayEIGp1klDiACd7tY1S3l5EF5w8OFCttJrSCzOCq5DiQJIVtXD00JECesQ8ZWl63ku60fH0eEp1WYisLBYFXJWMtN5oi4NiNbp_rmvTDsLLgw_i8XFzpxYH8ZRaT8afB4Zc",
+        "width": 4032
+      },
+      {
+        "height": 3072,
+        "html_attributions": [
+          "\u003ca href=\"https://maps.google.com/maps/contrib/113206800765314366478\"\u003eLidizeth trillos bejarano\u003c/a\u003e"
+        ],
+        "photo_reference": "AZose0mUxjMR7w7xGJXuLARoRCYO7ayH-YxzdjDo6TeokswGVUqMJSvY9o2r0STpO0qBhPSijtDkJHm3_JAjqBVckBcyTwzN-kpurNXUCAMtlX_c6gRY45B31xiqRCkj4e3NTvvtwKOKliClyriJ2DppacTlEcmWefEzVfQ4kosT4f-EApI3",
+        "width": 4080
+      }
+    ],
+    "place_id": "ChIJ3VIJ3RDU9Y4RebJ_PBlgXj8",
+    "plus_code": {
+      "compound_code": "V4P6+35 Galapa, Atl\u00e1ntico, Colombia",
+      "global_code": "7727V4P6+35"
+    },
+    "rating": 4.6,
+    "reference": "ChIJ3VIJ3RDU9Y4RebJ_PBlgXj8",
+    "reviews": [
+      {
+        "author_name": "juan david gonzalez",
+        "author_url": "https://www.google.com/maps/contrib/108424865864868035593/reviews",
+        "language": "es",
+        "original_language": "es",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ACB-R5S9TuRmTBcPjgTWV2JzoeCImgD_XKKHqHRp15bBaA=s128-c0x00000000-cc-rp-mo-ba4",
+        "rating": 5,
+        "relative_time_description": "Hace 10 meses",
+        "text": "Me parece un lugar maravilloso para llevar a los ni\u00f1os, all\u00ed podr\u00e1s celebrar en familia su cumplea\u00f1os o pasar un d\u00eda agradable, hay mucha vegetaci\u00f3n, animales, aves y un sin fin de atractivos que solo un reservorio que esta en crecimiento puede ofrecer a un p\u00fablico en general me pareci\u00f3 bonito. Un Consejo; cambienle el nombre por el reservorio de Mao, o la Granja de Mao \ud83d\udc4d\ud83d\udc4d\ud83d\udc4d",
+        "time": 1658117524,
+        "translated": false
+      },
+      {
+        "author_name": "kelly Pi",
+        "author_url": "https://www.google.com/maps/contrib/106606818450352537279/reviews",
+        "language": "es",
+        "original_language": "es",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ACB-R5Rh705kWBvWmgYyCRz7LFVsmPx2qxuqlh1SD5PKzA=s128-c0x00000000-cc-rp-mo-ba3",
+        "rating": 5,
+        "relative_time_description": "Hace un a\u00f1o",
+        "text": "El sitio es chevere para ir en familia especialmente llevar a los ni\u00f1os y ni\u00f1as de la familia ya que se divertiran con todos los animalitos y el campo que encontrar\u00e1n aqui en este lugar. El reataurante es vacano y lo mejor si no has comido en ning\u00fan d\u00eda de tu vida en olla, en caldero o en tapa de caldero... date la vuelta por este lugar",
+        "time": 1651454692,
+        "translated": false
+      },
+      {
+        "author_name": "Lidizeth trillos bejarano",
+        "author_url": "https://www.google.com/maps/contrib/113206800765314366478/reviews",
+        "language": "es",
+        "original_language": "es",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ACB-R5QVqnpbh6P-J1k84xinbcHkN_pqF7PNRqPHP2ahgpM=s128-c0x00000000-cc-rp-mo-ba4",
+        "rating": 5,
+        "relative_time_description": "Hace 3 meses",
+        "text": "Es un lugar para disfrutar la naturaleza y comer delicioso en el restaurante o festejar un cumplea\u00f1os. Se recibe un brazalete para 7 atracciones para ni\u00f1os e igual otro para adultos. Hoy 12 de febrero est\u00e1 en 75000 para ni\u00f1os y 37 adultos con todas las atracciones que incluyen montar pony, alimentar animales en las granjas, pint ball, zipline, bosque encantado donde hay una casa en el \u00e1rbol y actividades de equilibrio, es un mini zool\u00f3gico y se le da comida a los animales como avestruz, b\u00fafalos, conejos, cabra, pollos..  Tambi\u00e9n un mariposario y se explican ampliamente el ciclo de los huevos y las orugas....S\u00faper recomendado",
+        "time": 1676239704,
+        "translated": false
+      },
+      {
+        "author_name": "Mauro Acevedo",
+        "author_url": "https://www.google.com/maps/contrib/114265547194037483183/reviews",
+        "language": "es",
+        "original_language": "es",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ACB-R5R504Sie7zcIoygT6mw5EVWMvrwpyCYV4geqav3GQ=s128-c0x00000000-cc-rp-mo-ba4",
+        "rating": 4,
+        "relative_time_description": "Hace 4 meses",
+        "text": "Lugar campestre, ambiente familia, tiene un restaurante amplio especializado en asados y sancochos, comida tradicional, tiene buena organizaci\u00f3n en la entrada y orden en parqueadero",
+        "time": 1673293666,
+        "translated": false
+      },
+      {
+        "author_name": "Nathalia Campo",
+        "author_url": "https://www.google.com/maps/contrib/108355214197634886825/reviews",
+        "language": "es",
+        "original_language": "es",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a-/ACB-R5Rf2kj071lhC_aPDEvVpHWFhAxcQpNH__3eD0oFU9Y=s128-c0x00000000-cc-rp-mo-ba2",
+        "rating": 5,
+        "relative_time_description": "Hace un a\u00f1o",
+        "text": "La comida es muy deliciosa y la atenci\u00f3n, rapida. El sitio es excelente para visitar con los ni\u00f1os. El mariposario es hermoso. Puedes tener contacto directo con los animales. Una experiencia agradable.",
+        "time": 1626295514,
+        "translated": false
+      }
+    ],
+    "secondary_opening_hours": [
+      {
+        "open_now": false,
+        "periods": [
+          {
+            "close": {
+              "date": "2023-05-21",
+              "day": 0,
+              "time": "1130"
+            },
+            "open": {
+              "date": "2023-05-21",
+              "day": 0,
+              "time": "0900"
+            }
+          },
+          {
+            "close": {
+              "date": "2023-05-20",
+              "day": 6,
+              "time": "1130"
+            },
+            "open": {
+              "date": "2023-05-20",
+              "day": 6,
+              "time": "0900"
+            }
+          }
+        ],
+        "type": "BREAKFAST",
+        "weekday_text": [
+          "lunes: Cerrado",
+          "martes: Cerrado",
+          "mi\u00e9rcoles: Cerrado",
+          "jueves: Cerrado",
+          "viernes: Cerrado",
+          "s\u00e1bado: 9:00\u201311:30",
+          "domingo: 9:00\u201311:30"
+        ]
+      },
+      {
+        "open_now": false,
+        "periods": [
+          {
+            "close": {
+              "date": "2023-05-21",
+              "day": 0,
+              "time": "1600"
+            },
+            "open": {
+              "date": "2023-05-21",
+              "day": 0,
+              "time": "1200"
+            }
+          },
+          {
+            "close": {
+              "date": "2023-05-22",
+              "day": 1,
+              "time": "1600"
+            },
+            "open": {
+              "date": "2023-05-22",
+              "day": 1,
+              "time": "1200"
+            }
+          },
+          {
+            "close": {
+              "date": "2023-05-23",
+              "day": 2,
+              "time": "1600"
+            },
+            "open": {
+              "date": "2023-05-23",
+              "day": 2,
+              "time": "1200"
+            }
+          },
+          {
+            "close": {
+              "date": "2023-05-24",
+              "day": 3,
+              "time": "1600"
+            },
+            "open": {
+              "date": "2023-05-24",
+              "day": 3,
+              "time": "1200"
+            }
+          },
+          {
+            "close": {
+              "date": "2023-05-25",
+              "day": 4,
+              "time": "1600"
+            },
+            "open": {
+              "date": "2023-05-25",
+              "day": 4,
+              "time": "1200"
+            }
+          },
+          {
+            "close": {
+              "date": "2023-05-26",
+              "day": 5,
+              "time": "1600"
+            },
+            "open": {
+              "date": "2023-05-26",
+              "day": 5,
+              "time": "1200"
+            }
+          },
+          {
+            "close": {
+              "date": "2023-05-20",
+              "day": 6,
+              "time": "1600"
+            },
+            "open": {
+              "date": "2023-05-20",
+              "day": 6,
+              "time": "1200"
+            }
+          }
+        ],
+        "type": "LUNCH",
+        "weekday_text": [
+          "lunes: 12:00\u201316:00",
+          "martes: 12:00\u201316:00",
+          "mi\u00e9rcoles: 12:00\u201316:00",
+          "jueves: 12:00\u201316:00",
+          "viernes: 12:00\u201316:00",
+          "s\u00e1bado: 12:00\u201316:00",
+          "domingo: 12:00\u201316:00"
+        ]
+      }
+    ],
+    "types": ["park", "point_of_interest", "establishment"],
+    "url": "https://maps.google.com/?cid=4566192733705712249",
+    "user_ratings_total": 925,
+    "utc_offset": -300,
+    "vicinity": "KM 8 via la cordialidad",
+    "website": "http://www.elsolardemao.com/",
+    "wheelchair_accessible_entrance": true
+  }
+]

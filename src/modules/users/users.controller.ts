@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { IUser, TLoginUser, IUpdate } from './users.service';
-import { register, login, update } from './users.service';
+import { register, login, update, verify } from './users.service';
+import { sendVerificationMail } from '../../helpers/sendEmail';
 
 interface IRegisterBody extends IUser {
   [key: string]: string;
@@ -39,7 +40,16 @@ export const registerUser = async (
   }
 
   const user = await register(req.body);
-  res.code(201).send({ status: 'ok', msg: 'Usuario creado, Se envio un correo de validación' });
+
+  await sendVerificationMail({
+    email: user.email,
+    name: user.name,
+    confirmCode: user.confirmCode ? user.confirmCode : '',
+  });
+
+  res
+    .code(201)
+    .send({ status: 'ok', msg: 'Usuario registrado, Se envió  un correo de validación' });
 };
 
 export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: FastifyReply) => {
@@ -63,10 +73,21 @@ export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: 
     return;
   }
   const user = await login(req.body);
+  if (!user.isConfirm) {
+    await sendVerificationMail({
+      email: user.email,
+      name: user.name,
+      confirmCode: user.confirmCode ? user.confirmCode : '',
+    });
+    return res.code(400).send({
+      status: 'ok',
+      msg: 'Por favor verifique su cuenta, Se envió un correo de validación',
+    });
+  }
   const token = await res.jwtSign({ _id: user._id });
   res.code(200).send({
     status: 'ok',
-    msg: 'sucessful',
+    msg: 'successful',
     data: {
       accesstoken: token,
       name: user.name,
@@ -79,13 +100,11 @@ export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: 
 export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: FastifyReply) => {
   const requiredFields = ['email', 'name', 'avatar'];
   const missingFields = [];
-
   for (const field of requiredFields) {
     if (!req.body[field]) {
       missingFields.push(field);
     }
   }
-
   if (missingFields.length > 0) {
     const missingFieldsMsg = missingFields.join(', ');
     res.status(400).send({
@@ -94,7 +113,6 @@ export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: Fa
     });
     return;
   }
-
   const { _id } = req.user;
   const user = await update(_id.toString(), req.body);
   if (!user)
@@ -111,4 +129,26 @@ export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: Fa
       avatar: user.avatar,
     },
   });
+};
+
+export const verifyUser = async (
+  req: FastifyRequest<{ Params: { code: string } }>,
+  res: FastifyReply,
+) => {
+  const code = req.params.code;
+
+  if (!code) {
+    return res.code(400).send({
+      status: 'failed',
+      msg: 'Code validation is required',
+    });
+  }
+
+  const user = await verify(code);
+  if (user) {
+    res.code(200).send({
+      status: 'ok',
+      msg: 'Usuario Confimado',
+    });
+  }
 };

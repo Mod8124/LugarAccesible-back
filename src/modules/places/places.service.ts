@@ -1,7 +1,9 @@
 import { GOOGLE_MAPS_KEY } from '../../../config';
 import { getWeelChair, filteredTypes } from '../search/search.service';
 import Favorite from '../../db/models/favoriteModel';
-import { getRating, getComments } from '../comments/comments.service';
+import { IconsPlaces, PlacesName } from '../../helpers/IconsPlaces';
+import { v4 as uuidv4 } from 'uuid';
+import * as geolib from 'geolib';
 
 export type Location = {
   lat: string;
@@ -86,4 +88,39 @@ export const getDetails = async (place_id: string, user_id?: string) => {
   };
 
   return newData;
+};
+
+function generateMockLocation(latitude: number, longitude: number) {
+  // Generate a random point within a radius of 5000 meters
+  const randomLocation = geolib.computeDestinationPoint(
+    { latitude, longitude },
+    Math.random() * 5000,
+    Math.random() * 360,
+  );
+
+  const mockLocation = {
+    lat: randomLocation.latitude,
+    lng: randomLocation.longitude,
+  };
+
+  return mockLocation;
+}
+
+const createPlace = (lat: number, lng: number) => {
+  return {
+    name: [PlacesName[Math.floor(Math.random() * PlacesName.length)]],
+    place_id: uuidv4(),
+    location: generateMockLocation(lat, lng),
+    wheelchair_accessible_entrance: Math.random() < 0.5,
+    types: [IconsPlaces[Math.floor(Math.random() * IconsPlaces.length)]],
+  };
+};
+
+export const generate20NearPlaces = (lat: number, lng: number) => {
+  let result = [];
+  while (result.length < 20) {
+    result.push(createPlace(lat, lng));
+  }
+
+  return result;
 };

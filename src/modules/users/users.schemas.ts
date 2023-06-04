@@ -38,12 +38,23 @@ const bodyUpdate = z.object({
   name: z.string(),
   email: z.string(),
   avatar: z.string(),
+  password: z.string().optional(),
+  newPassword: z.string().optional(),
 });
 
 const updateSuccess = z.object({
   status: z.string(),
   msg: z.string(),
-  data: bodyUpdate,
+  data: z.object({
+    name: z.string(),
+    email: z.string(),
+    avatar: z.string(),
+  }),
+});
+
+// verify
+const paramsVerify = z.object({
+  code: z.string(),
 });
 
 export const { schemas: userSchema, $ref } = buildJsonSchemas(
@@ -55,6 +66,7 @@ export const { schemas: userSchema, $ref } = buildJsonSchemas(
     loginSuccess,
     bodyUpdate,
     updateSuccess,
+    paramsVerify,
   },
   { $id: 'User_Schemas' },
 );

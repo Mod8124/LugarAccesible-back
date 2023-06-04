@@ -1,0 +1,145 @@
+{
+  "results": [
+    {
+      "place_id": "ChIJm288OiuNM5AR89vQAmllbvk",
+      "name": "Tumbes",
+      "location": { "lat": -3.5564921, "lng": -80.4270885 },
+      "wheelchair_accessible_entrance": false,
+      "types": ["restaurant"]
+    },
+    {
+      "place_id": "ChIJx4KI3VqaM5AR10TWM-7S3Iw",
+      "name": "Wyndham Costa del Sol Tumbes",
+      "location": { "lat": -3.5679903, "lng": -80.4577331 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["library"]
+    },
+    {
+      "place_id": "ChIJgXXX8NXyM5ARS5tE5kZlN4Q",
+      "name": "Rizzo Plaza Hotel",
+      "location": { "lat": -3.5702662, "lng": -80.4586084 },
+      "wheelchair_accessible_entrance": false,
+      "types": ["parking"]
+    },
+    {
+      "place_id": "ChIJC5BkjNXyM5ARALH_Ilsb4Xo",
+      "name": "Hotel Gran Imperial",
+      "location": { "lat": -3.5715379, "lng": -80.45886759999999 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["hotel"]
+    },
+    {
+      "place_id": "ChIJS6j4oyrzM5ARXj1V3gyn4Nc",
+      "name": "Hotel B´liam",
+      "location": { "lat": -3.5706578, "lng": -80.4569427 },
+      "wheelchair_accessible_entrance": false,
+      "types": ["supermarket"]
+    },
+    {
+      "place_id": "ChIJE7ECu9XyM5ARPDAVQVjUD-U",
+      "name": "Hotel Feijoo",
+      "location": { "lat": -3.5700643, "lng": -80.4585468 },
+      "wheelchair_accessible_entrance": false,
+      "types": ["supermarket"]
+    },
+    {
+      "place_id": "ChIJHUo2iSrzM5ARNFlYNcE48Xc",
+      "name": "La Casa de Chepita",
+      "location": { "lat": -3.5740465, "lng": -80.4550132 },
+      "wheelchair_accessible_entrance": false,
+      "types": ["supermarket"]
+    },
+    {
+      "place_id": "ChIJ5ZFNZ2bzM5AR5uUWKuFpxCI",
+      "name": "Kingdom Hall",
+      "location": { "lat": -3.6023936, "lng": -80.4841409 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["hospital"]
+    },
+    {
+      "place_id": "ChIJt14RpHHzM5ARsmctqSWiGUE",
+      "name": "Costa Gas Tumbes",
+      "location": { "lat": -3.5987596, "lng": -80.49071400000001 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["hospital"]
+    },
+    {
+      "place_id": "ChIJYRS25tXyM5ARvbwkIGx9BQ8",
+      "name": "Caja Trujillo - Ag. Tumbes",
+      "location": { "lat": -3.5707711, "lng": -80.4601007 },
+      "wheelchair_accessible_entrance": false,
+      "types": ["bar"]
+    },
+    {
+      "place_id": "ChIJAUoCk3b0M5ARXYKjcI5bCvk",
+      "name": "Kingdom Hall",
+      "location": { "lat": -3.6156778, "lng": -80.5148178 },
+      "wheelchair_accessible_entrance": false,
+      "types": ["bar"]
+    },
+    {
+      "place_id": "ChIJ0bAbFMyMM5ARMc5gNZ_S9nQ",
+      "name": "Pampa Grande Tumbes",
+      "location": { "lat": -3.585492299999999, "lng": -80.4504297 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["bar"]
+    },
+    {
+      "place_id": "ChIJzVXwbCrzM5AR44ewF_UDHGk",
+      "name": "MAPFRE",
+      "location": { "lat": -3.572713, "lng": -80.458854 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["bar"]
+    },
+    {
+      "place_id": "ChIJr810CCrzM5ARSFX-z8B_BhI",
+      "name": "Eduardo El Brujo",
+      "location": { "lat": -3.571898299999999, "lng": -80.459755 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["bar"]
+    },
+    {
+      "place_id": "ChIJYwmgCdbyM5ARIx2kk8hhcEI",
+      "name": "Tikis Restaurant & Bar",
+      "location": { "lat": -3.5709736, "lng": -80.4606372 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["bar"]
+    },
+    {
+      "place_id": "ChIJ2_8lcirzM5AR2va8rx_xfNA",
+      "name": "Colegio Pre Universitario Thales de Mileto",
+      "location": { "lat": -3.572284, "lng": -80.4587761 },
+      "wheelchair_accessible_entrance": true,
+      "types": []
+    },
+    {
+      "place_id": "ChIJFSW2lM2MM5AR1GEtkqbLrC4",
+      "name": "Kingdom Hall",
+      "location": { "lat": -3.5827263, "lng": -80.4508208 },
+      "wheelchair_accessible_entrance": false,
+      "types": []
+    },
+    {
+      "place_id": "ChIJVQDlbyrzM5ARi90TLIQdhFo",
+      "name": "IncaBiotec S.A .C",
+      "location": { "lat": -3.572487199999999, "lng": -80.4584567 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["park"]
+    },
+    {
+      "place_id": "ChIJQzkv3dXyM5AR8c-9AXLiTyU",
+      "name": "Financiera Crediscotia, Tumbes",
+      "location": { "lat": -3.5705287, "lng": -80.4600785 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["park"]
+    },
+    {
+      "place_id": "ChIJPaZmUV3zM5ARL2QLijqZsjE",
+      "name": "Corrales",
+      "location": { "lat": -3.6045193, "lng": -80.4799273 },
+      "wheelchair_accessible_entrance": true,
+      "types": ["park"]
+    }
+  ],
+  "status": "OK"
+}

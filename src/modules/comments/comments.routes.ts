@@ -7,7 +7,7 @@ import {
 } from './comments.controller';
 import { $ref } from './comments.schemas';
 
-export async function commentRoutes(app: FastifyInstance) {
+export async function CommentRoutes(app: FastifyInstance) {
   app.get(
     '/',
     {
@@ -61,13 +61,13 @@ export async function commentRoutes(app: FastifyInstance) {
   );
 
   app.delete(
-    '/',
+    '/delete/:id/:place_id',
     {
       preHandler: [app.authenticate],
       schema: {
         tags: ['Comment'],
         summary: 'Delete a comment by place_id and id comment',
-        body: $ref('bodyDeleteComment'),
+        params: $ref('paramsDeleteComment'),
         response: {
           200: $ref('responseOkGetComment'),
           400: $ref('responseFailedGetComments'),

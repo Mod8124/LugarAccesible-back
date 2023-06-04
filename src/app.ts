@@ -4,23 +4,26 @@ import cors from '@fastify/cors';
 import fastifySwagger from '@fastify/swagger';
 import { withRefResolver } from 'fastify-zod';
 import swaggerUI from '@fastify/swagger-ui';
-import type { FastifyRequest, FastifyReply } from 'fastify';
+import { authenticate, hasToken } from './middleware/authentication';
 import { ConnectMongoDb } from './db/connection/connect';
 import { JWT_SECRET } from '../config';
+import fastifyMultipart from '@fastify/multipart';
 
 import { UserRoutes } from './modules/users/users.routes';
 import PlaceRoutes from './modules/places/places.routes';
 import SearchRoutes from './modules/search/search.routes';
 import { FeedbackRoutes } from './modules/feedback/feedback.routes';
-import { commentRoutes } from './modules/comments/comments.routes';
+import { CommentRoutes } from './modules/comments/comments.routes';
+import { FavoritesRoutes } from './modules/favorites/favorites.routes';
 
 import { userSchema } from './modules/users/users.schemas';
 import { placeSchema } from './modules/places/places.schemas';
 import { searchSchema } from './modules/search/search.schema';
 import { feedbackSchema } from './modules/feedback/feedback.schema';
 import { commentSchema } from './modules/comments/comments.schemas';
+import { favoriteSchema } from './modules/favorites/favorites.schema';
 
-const path = require('path')
+const path = require('path');
 
 declare module 'fastify' {
   export interface FastifyInstance {
@@ -40,6 +43,8 @@ export function buildApp() {
   const app = Fastify();
   ConnectMongoDb();
   app.register(cors);
+
+  app.register(fastifyMultipart);
 
   app.register(fastifyJwt, {
     secret: JWT_SECRET,
@@ -78,21 +83,8 @@ export function buildApp() {
     transformSpecificationClone: true,
   });
 
-  app.decorate('authenticate', async (request: FastifyRequest, reply: FastifyReply) => {
-    try {
-      await request.jwtVerify();
-    } catch (e) {
-      return reply.code(401).send({ staus: 'failed', msg: 'Unauthorized' });
-    }
-  });
-
-  app.decorate('hasToken', async (request: FastifyRequest, reply: FastifyReply, done: any) => {
-    try {
-      await request.jwtVerify();
-    } catch (e) {
-      if (e) done();
-    }
-  });
+  app.decorate('authenticate', authenticate);
+  app.decorate('hasToken', hasToken);
 
   //::Register Schemas
   for (const schema of [
@@ -101,6 +93,7 @@ export function buildApp() {
     ...searchSchema,
     ...feedbackSchema,
     ...commentSchema,
+    ...favoriteSchema,
   ]) {
     app.addSchema(schema);
   }
@@ -109,9 +102,10 @@ export function buildApp() {
   const base = '/api/v1/';
   app.register(UserRoutes, { prefix: base + 'user' });
   app.register(PlaceRoutes, { prefix: base + 'place' });
-  app.register(commentRoutes, { prefix: base + 'comment' });
+  app.register(CommentRoutes, { prefix: base + 'comment' });
   app.register(SearchRoutes, { prefix: base + 'search' });
   app.register(FeedbackRoutes, { prefix: base + 'feedback' });
+  app.register(FavoritesRoutes, { prefix: base + 'favorite' });
 
   app.get('/', async function (req, res) {
     res.redirect('/docs');
@@ -125,8 +119,8 @@ export function buildApp() {
   });
 
   app.register(require('@fastify/static'), {
-    root: path.join(__dirname, 'front')
-  })
+    root: path.join(__dirname, 'front'),
+  });
 
   return app;
 }

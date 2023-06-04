@@ -1,0 +1,185 @@
+{
+  "status": "ok",
+  "data": [
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "506, San José, San Sebastian, Costa Rica",
+      "location": {
+        "lat": 9.9061031,
+        "lng": -84.0868126
+      },
+      "name": "Taqueria Sole",
+      "opening_hours": {
+        "open_now": true
+      },
+      "place_id": "ChIJaThAODvjoI8R0Tx9TWO5MZU",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": false
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Calle 5, San Cayetano, San José Province, San José, Costa Rica",
+      "location": {
+        "lat": 9.9217291,
+        "lng": -84.0781944
+      },
+      "name": "Soda Q' Taco",
+      "opening_hours": {
+        "open_now": false
+      },
+      "place_id": "ChIJETNzJWrjoI8RHihobrKrdTU",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": false
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "WW54+V9M, Umara, San José, Costa Rica",
+      "location": {
+        "lat": 9.9097222,
+        "lng": -84.09407689999999
+      },
+      "name": "Taco Bell • Bambú",
+      "opening_hours": {
+        "open_now": true
+      },
+      "place_id": "ChIJadMiDzHjoI8RQiY9GItyvuM",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": true
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "C. Real San Juan de Dios, San Rafael Abajo, San José, Alajuelita, Costa Rica",
+      "location": {
+        "lat": 9.8910232,
+        "lng": -84.0821995
+      },
+      "name": "Taco Factory",
+      "opening_hours": {
+        "open_now": true
+      },
+      "place_id": "ChIJtQOkWt7ioI8RenUnhec27-U",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": true
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "WW49+MWF, Paso Ancho, San José, Costa Rica",
+      "location": {
+        "lat": 9.9066657,
+        "lng": -84.0802018
+      },
+      "name": "Taquería Deli Fast",
+      "opening_hours": {
+        "open_now": false
+      },
+      "place_id": "ChIJdSf-l0HjoI8RGUv8ZeH3VRI",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": false
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "10312, San José, Desamparados, Costa Rica",
+      "location": {
+        "lat": 9.8919535,
+        "lng": -84.0615254
+      },
+      "name": "Taco Rico Gravilias",
+      "opening_hours": {
+        "open_now": true
+      },
+      "place_id": "ChIJ-bcWsv_ioI8RNeH08QfVqRw",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": false
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "100 S. de Saretto, carretera hacia, Los Anonos, San José, Escazú, Costa Rica",
+      "location": {
+        "lat": 9.93217,
+        "lng": -84.1255359
+      },
+      "name": "Tacobar Escazú",
+      "opening_hours": {
+        "open_now": true
+      },
+      "place_id": "ChIJY17bBJn8oI8R-8rpnhvhgbM",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": true
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Calle 114, Rancho Luna, San José, Costa Rica",
+      "location": {
+        "lat": 9.9349945,
+        "lng": -84.1119508
+      },
+      "name": "La Tacopedia",
+      "opening_hours": {
+        "open_now": true
+      },
+      "place_id": "ChIJHSpfh2T7oI8RC-RXucNMiqU",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": true
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "WWMF+8CM, Calle 5, Catedral, San José Province, San José, Costa Rica",
+      "location": {
+        "lat": 9.933347399999999,
+        "lng": -84.076442
+      },
+      "name": "Taco Bell",
+      "opening_hours": {
+        "open_now": true
+      },
+      "place_id": "ChIJ5Rlny2bjoI8RUi9HK9qf4ys",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": true
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "WW6R+GC5, San Francisco, San José, San Francisco, Costa Rica",
+      "location": {
+        "lat": 9.9112364,
+        "lng": -84.0588806
+      },
+      "name": "Taco Mío",
+      "opening_hours": {
+        "open_now": true
+      },
+      "place_id": "ChIJu6uhqaDjoI8RI9KR5TqbaXM",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": false
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "WWM8+H6W, Merced, San José, Costa Rica",
+      "location": {
+        "lat": 9.933851299999999,
+        "lng": -84.0844345
+      },
+      "name": "Taco Bell",
+      "opening_hours": {
+        "open_now": true
+      },
+      "place_id": "ChIJ7ZF6pqvjoI8RHs8v9lZgF0M",
+      "types": ["restaurant"],
+      "wheelchair_accessible_entrance": true
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "Av. 62A, El Bosque, San José, Costa Rica",
+      "location": {
+        "lat": 9.9055585,
+        "lng": -84.0571925
+      },
+      "name": "Taco Rico San Fra",
+      "opening_hours": {
+        "open_now": true
+      },
+      "place_id": "ChIJFaWW2afjoI8R2Zx6Cx1J1L4",
+      "types": ["meal_takeaway", "meal_delivery", "restaurant"],
+      "wheelchair_accessible_entrance": true
+    }
+  ]
+}

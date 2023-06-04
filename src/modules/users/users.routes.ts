@@ -1,5 +1,5 @@
 import { type FastifyInstance } from 'fastify';
-import { registerUser, loginUser, updateUser } from './users.controller';
+import { registerUser, loginUser, updateUser, verifyUser } from './users.controller';
 import { $ref } from './users.schemas';
 
 export async function UserRoutes(app: FastifyInstance) {
@@ -50,5 +50,21 @@ export async function UserRoutes(app: FastifyInstance) {
       },
     },
     updateUser,
+  );
+
+  app.get(
+    '/validation/:code',
+    {
+      schema: {
+        tags: ['User'],
+        summary: 'confirm account user',
+        params: $ref('paramsVerify'),
+        response: {
+          200: $ref('registerFailed'),
+          400: $ref('registerFailed'),
+        },
+      },
+    },
+    verifyUser,
   );
 }

@@ -25,6 +25,11 @@ export const login = async (object: TLoginUser) => {
 };
 
 export const update = async (id: string, object: IUpdate) => {
-  const updatedUser = await User.findByIdAndUpdate(id, object, { new: true });
+  const updatedUser = await User.update(id, object);
   return updatedUser;
+};
+
+export const verify = async (confirmCode: string) => {
+  const updateUser = await User.verify(confirmCode);
+  return updateUser;
 };

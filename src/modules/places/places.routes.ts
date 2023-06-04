@@ -1,5 +1,10 @@
 import { type FastifyInstance } from 'fastify';
-import { getDetailHandler, getPlacesHandler } from './places.controller';
+import {
+  getDetailHandler,
+  getPlacesHandler,
+  getPlacesMock,
+  getDetailMock,
+} from './places.controller';
 import { $placeRef } from './places.schemas';
 
 export async function PlaceRoutes(app: FastifyInstance) {
@@ -16,6 +21,18 @@ export async function PlaceRoutes(app: FastifyInstance) {
       },
     },
     getPlacesHandler,
+  );
+
+  app.get(
+    '/list/mock',
+    {
+      schema: {
+        tags: ['Place'],
+        summary: 'Get 20 mock places',
+        querystring: $placeRef('locationSchema'),
+      },
+    },
+    getPlacesMock,
   );
 
   app.get(
@@ -46,6 +63,17 @@ export async function PlaceRoutes(app: FastifyInstance) {
       },
     },
     getDetailHandler,
+  );
+
+  app.get(
+    '/detail/mock',
+    {
+      schema: {
+        tags: ['Place'],
+        summary: 'Generate a detail mock up place',
+      },
+    },
+    getDetailMock,
   );
 }
 
