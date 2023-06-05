@@ -13,6 +13,9 @@ const responseOkGetFavorites = z.object({
         lat: z.number(),
         lng: z.number(),
       }),
+      formatted_address: z.string().optional(),
+      types: z.array(z.string().optional()),
+      wheelchair_accessible_entrance: z.boolean(),
     }),
   ),
 });
@@ -29,6 +32,9 @@ const bodyPostFavorite = z.object({
     lat: z.number(),
     lng: z.number(),
   }),
+  formatted_address: z.string().optional(),
+  types: z.array(z.string()),
+  wheelchair_accessible_entrance: z.boolean(),
 });
 
 const paramsDeleteFavorite = z.object({

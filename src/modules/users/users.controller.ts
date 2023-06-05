@@ -124,7 +124,7 @@ export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: Fa
       name: user.name,
       confirmCode: user.confirmCode ? user.confirmCode : '',
     });
-    message = 'Usuario Actualizado, Se envió un correo de validación, verifícalo más tarde';
+    message = 'Perfil Actualizado, Se envió un correo de validación, verifícalo más tarde';
   } else {
     message = 'Usuario Actualizado';
   }

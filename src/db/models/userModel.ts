@@ -182,8 +182,6 @@ userSchema.statics.update = async function (id, { email, name, avatar, password,
     user.confirmCode = cryptoToken;
   }
 
-  if (!user) throw Error('El usuario no existe');
-
   user.name = name;
   user.email = email;
   user.avatar = avatar;

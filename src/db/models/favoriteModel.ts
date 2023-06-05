@@ -8,7 +8,16 @@ const favoriteSchema = new schema({
     unique: true,
   },
   favorites: {
-    type: [{ place_id: String, name: String, location: { lat: Number, lng: Number } }],
+    type: [
+      {
+        place_id: String,
+        name: String,
+        formatted_address: String,
+        location: { lat: Number, lng: Number },
+        types: [String],
+        wheelchair_accessible_entrance: Boolean,
+      },
+    ],
     required: false,
   },
 });
