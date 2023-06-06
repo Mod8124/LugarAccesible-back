@@ -194,3 +194,18 @@ export const verifyUser = async (
     });
   }
 };
+
+export const logoutUser = async (req: FastifyRequest, res: FastifyReply) => {
+  res
+    .clearCookie('token', {
+      path: '/',
+      secure: true,
+      httpOnly: true,
+      sameSite: true,
+    })
+    .code(200)
+    .send({
+      status: 'ok',
+      msg: 'Successful delete cookie',
+    });
+};

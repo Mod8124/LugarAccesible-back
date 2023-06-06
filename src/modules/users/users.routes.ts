@@ -5,6 +5,7 @@ import {
   updateUser,
   updatePasswordUser,
   verifyUser,
+  logoutUser,
 } from './users.controller';
 import { $ref } from './users.schemas';
 
@@ -89,5 +90,20 @@ export async function UserRoutes(app: FastifyInstance) {
       },
     },
     verifyUser,
+  );
+
+  app.get(
+    '/logout',
+    {
+      preHandler: [app.authenticate],
+      schema: {
+        tags: ['User'],
+        summary: 'logout user session, clear http only cookie',
+        response: {
+          200: $ref('registerFailed'),
+        },
+      },
+    },
+    logoutUser,
   );
 }
