@@ -26,7 +26,7 @@ const bodyLogin = z.object({
 const loginSuccess = z.object({
   status: z.string(),
   data: z.object({
-    accesstoken: z.string(),
+    // accesstoken: z.string(),
     name: z.string(),
     email: z.string(),
     avatar: z.string(),

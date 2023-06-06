@@ -8,6 +8,8 @@ import { authenticate, hasToken } from './middleware/authentication';
 import { ConnectMongoDb } from './db/connection/connect';
 import { JWT_SECRET } from '../config';
 import fastifyMultipart from '@fastify/multipart';
+import fastifyCookie from '@fastify/cookie';
+import { HOST } from '../config';
 
 import { UserRoutes } from './modules/users/users.routes';
 import PlaceRoutes from './modules/places/places.routes';
@@ -41,13 +43,23 @@ declare module '@fastify/jwt' {
 
 export function buildApp() {
   const app = Fastify();
-  ConnectMongoDb();
-  app.register(cors);
 
-  app.register(fastifyMultipart);
+  ConnectMongoDb();
+  app.register(cors, {
+    origin: HOST, // domain origin of client app
+    credentials: true,
+  });
+
+  app.register(fastifyMultipart); // to read file, img, etc
+
+  app.register(fastifyCookie); // to set httpOnly Cookie
 
   app.register(fastifyJwt, {
     secret: JWT_SECRET,
+    cookie: {
+      cookieName: 'token',
+      signed: false, // the cookie by including an additional signature with the cookie value
+    },
     sign: {
       expiresIn: '10h', // <== Token expires in 10 hours
     },

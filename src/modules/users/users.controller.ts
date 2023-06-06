@@ -85,16 +85,24 @@ export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: 
     });
   }
   const token = await res.jwtSign({ _id: user._id });
-  res.code(200).send({
-    status: 'ok',
-    msg: 'successful',
-    data: {
-      accesstoken: token,
-      name: user.name,
-      email: user.email,
-      avatar: user.avatar,
-    },
-  });
+
+  res
+    .setCookie('token', token, {
+      path: '/',
+      secure: true, // send cookie over HTTPS only
+      httpOnly: true,
+      sameSite: true, // alternative CSRF protection
+    })
+    .code(200)
+    .send({
+      status: 'ok',
+      msg: 'successful',
+      data: {
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+      },
+    });
 };
 
 export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: FastifyReply) => {
