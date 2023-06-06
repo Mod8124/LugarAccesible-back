@@ -1,5 +1,12 @@
 import { type FastifyInstance } from 'fastify';
-import { registerUser, loginUser, updateUser, verifyUser } from './users.controller';
+import {
+  registerUser,
+  loginUser,
+  updateUser,
+  updatePasswordUser,
+  verifyUser,
+  logoutUser,
+} from './users.controller';
 import { $ref } from './users.schemas';
 
 export async function UserRoutes(app: FastifyInstance) {
@@ -52,6 +59,23 @@ export async function UserRoutes(app: FastifyInstance) {
     updateUser,
   );
 
+  app.post(
+    '/updatePassword',
+    {
+      preHandler: [app.authenticate],
+      schema: {
+        tags: ['User'],
+        summary: 'update password the user',
+        body: $ref('bodyUpdatePassword'),
+        response: {
+          200: $ref('registerFailed'),
+          400: $ref('registerFailed'),
+        },
+      },
+    },
+    updatePasswordUser,
+  );
+
   app.get(
     '/validation/:code',
     {
@@ -66,5 +90,20 @@ export async function UserRoutes(app: FastifyInstance) {
       },
     },
     verifyUser,
+  );
+
+  app.get(
+    '/logout',
+    {
+      preHandler: [app.authenticate],
+      schema: {
+        tags: ['User'],
+        summary: 'logout user session, clear http only cookie',
+        response: {
+          200: $ref('registerFailed'),
+        },
+      },
+    },
+    logoutUser,
   );
 }

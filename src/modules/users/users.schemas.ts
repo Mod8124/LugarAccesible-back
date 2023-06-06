@@ -26,7 +26,7 @@ const bodyLogin = z.object({
 const loginSuccess = z.object({
   status: z.string(),
   data: z.object({
-    accesstoken: z.string(),
+    // accesstoken: z.string(),
     name: z.string(),
     email: z.string(),
     avatar: z.string(),
@@ -38,8 +38,6 @@ const bodyUpdate = z.object({
   name: z.string(),
   email: z.string(),
   avatar: z.string(),
-  password: z.string().optional(),
-  newPassword: z.string().optional(),
 });
 
 const updateSuccess = z.object({
@@ -50,6 +48,12 @@ const updateSuccess = z.object({
     email: z.string(),
     avatar: z.string(),
   }),
+});
+
+// update password
+const bodyUpdatePassword = z.object({
+  currentPassword: z.string(),
+  newPassword: z.string(),
 });
 
 // verify
@@ -65,6 +69,7 @@ export const { schemas: userSchema, $ref } = buildJsonSchemas(
     bodyLogin,
     loginSuccess,
     bodyUpdate,
+    bodyUpdatePassword,
     updateSuccess,
     paramsVerify,
   },

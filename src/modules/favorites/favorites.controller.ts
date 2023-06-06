@@ -17,7 +17,13 @@ export const postFavoriteByPlaceId = async (
   }>,
   res: FastifyReply,
 ) => {
-  const requiredFields = ['place_id', 'name', 'location'];
+  const requiredFields = [
+    'place_id',
+    'name',
+    'location',
+    'wheelchair_accessible_entrance',
+    'types',
+  ];
   const missingFields = [];
 
   for (const field of requiredFields) {

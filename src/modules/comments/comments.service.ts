@@ -20,6 +20,14 @@ export interface IEdit extends IDelete {
   text: string;
 }
 
+interface IComment {
+  owner: boolean;
+  text?: string | undefined;
+  user_id?: string | undefined;
+  author?: string | undefined;
+  rating?: number | undefined;
+}
+
 export const getComments = async (place_id: string, user_id?: string) => {
   const comments = await Comment.findOne({ place_id }).lean();
   if (!comments) return [];
@@ -34,15 +42,12 @@ export const getComments = async (place_id: string, user_id?: string) => {
   return commentsWithOwnership;
 };
 
-export const getRating = async (place_id: string) => {
-  const comment = await Comment.findOne({ place_id });
-  if (!comment) {
+export const getRating = (comments: IComment[]) => {
+  if (comments.length === 0) {
     return 0;
   }
 
-  const comments = comment.comments;
-
-  if (comments && comments.length > 0) {
+  if (comments.length > 0) {
     const sum = comments.reduce((total, comment) => total + (comment.rating || 0), 0);
     const averageRating = sum / comments.length;
     return parseFloat(averageRating.toFixed(1));
@@ -83,7 +88,7 @@ export const editComment = async (body: IEdit, user_id: string) => {
   const commentIndex = commentArray.findIndex(
     (comment: any) => String(comment._id) === String(body.id),
   );
-  if (commentIndex === -1) return null;
+  if (commentIndex === -1) return await getComments(body.place_id, user_id);
 
   if (commentArray[commentIndex].user_id !== user_id) throw Error('The user is not owner');
   commentArray[commentIndex].author = body.author;

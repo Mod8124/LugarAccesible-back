@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { IUser, TLoginUser, IUpdate } from './users.service';
-import { register, login, update, verify } from './users.service';
-import { sendVerificationMail } from '../../helpers/sendEmail';
+import { register, login, update, verify, updatePassword } from './users.service';
+import { sendVerificationMail, sendVerificationChangeMail } from '../../helpers/sendEmail';
 
 interface IRegisterBody extends IUser {
   [key: string]: string;
@@ -85,16 +85,24 @@ export const loginUser = async (req: FastifyRequest<{ Body: ILoginBody }>, res: 
     });
   }
   const token = await res.jwtSign({ _id: user._id });
-  res.code(200).send({
-    status: 'ok',
-    msg: 'successful',
-    data: {
-      accesstoken: token,
-      name: user.name,
-      email: user.email,
-      avatar: user.avatar,
-    },
-  });
+
+  res
+    .setCookie('token', token, {
+      path: '/',
+      secure: true, // send cookie over HTTPS only
+      httpOnly: true,
+      sameSite: true, // alternative CSRF protection
+    })
+    .code(200)
+    .send({
+      status: 'ok',
+      msg: 'successful',
+      data: {
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+      },
+    });
 };
 
 export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: FastifyReply) => {
@@ -115,19 +123,53 @@ export const updateUser = async (req: FastifyRequest<{ Body: IUpdate }>, res: Fa
   }
   const { _id } = req.user;
   const user = await update(_id.toString(), req.body);
-  if (!user)
-    return res.code(400).send({
-      status: 'error',
-      msg: 'User not found in request',
+
+  let message;
+
+  if (!user.isConfirm) {
+    await sendVerificationChangeMail({
+      email: user.email,
+      name: user.name,
+      confirmCode: user.confirmCode ? user.confirmCode : '',
     });
+    message = 'Perfil Actualizado, Se envió un correo de validación, verifícalo más tarde';
+  } else {
+    message = 'Usuario Actualizado';
+  }
+
   res.code(200).send({
     status: 'ok',
-    msg: 'Usuario Actualizado',
+    msg: message,
     data: {
       name: user.name,
       email: user.email,
       avatar: user.avatar,
     },
+  });
+};
+
+export const updatePasswordUser = async (
+  req: FastifyRequest<{ Body: { currentPassword: string; newPassword: string } }>,
+  res: FastifyReply,
+) => {
+  const { currentPassword, newPassword } = req.body;
+  if (!currentPassword) {
+    return res.status(400).send({
+      status: 'failed',
+      msg: 'La contraseña actual es requerida',
+    });
+  }
+  if (!newPassword) {
+    return res.status(400).send({
+      status: 'failed',
+      msg: 'La contraseña nueva es requerida',
+    });
+  }
+  const { _id } = req.user;
+  await updatePassword(_id.toString(), req.body);
+  res.code(200).send({
+    status: 'ok',
+    msg: 'Contraseña Actualizada',
   });
 };
 
@@ -151,4 +193,19 @@ export const verifyUser = async (
       msg: 'Usuario Confimado',
     });
   }
+};
+
+export const logoutUser = async (req: FastifyRequest, res: FastifyReply) => {
+  res
+    .clearCookie('token', {
+      path: '/',
+      secure: true,
+      httpOnly: true,
+      sameSite: true,
+    })
+    .code(200)
+    .send({
+      status: 'ok',
+      msg: 'Successful delete cookie',
+    });
 };
