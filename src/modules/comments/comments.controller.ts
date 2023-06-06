@@ -23,7 +23,8 @@ export const getCommentByPlaceId = async (
 
   const { _id } = req.user || {};
   if (!_id) {
-    const [comments, rating] = await Promise.all([getComments(place_id), getRating(place_id)]);
+    const comments = await getComments(place_id);
+    const rating = getRating(comments);
     return res.code(200).send({
       status: 'ok',
       msg: 'get all comments succesful',
@@ -33,10 +34,8 @@ export const getCommentByPlaceId = async (
       },
     });
   }
-  const [comments, rating] = await Promise.all([
-    getComments(place_id, _id.toString()),
-    getRating(place_id),
-  ]);
+  const comments = await getComments(place_id, _id.toString());
+  const rating = getRating(comments);
   return res.code(200).send({
     status: 'ok',
     msg: 'get all comments succesful',
@@ -70,10 +69,8 @@ export const postCommentByPlaceID = async (
   }
 
   const { _id } = req.user;
-  const [comments, rating] = await Promise.all([
-    postComment(req.body, _id.toString()),
-    getRating(req.body.place_id),
-  ]);
+  const comments = await postComment(req.body, _id.toString());
+  const rating = getRating(comments);
 
   res.code(201).send({
     status: 'ok',
@@ -108,10 +105,8 @@ export const editCommentByPlaceId = async (
   }
   const body = req.body;
   const { _id } = req.user;
-  const [comments, rating] = await Promise.all([
-    editComment(body, _id.toString()),
-    getRating(req.body.place_id),
-  ]);
+  const comments = await editComment(body, _id.toString());
+  const rating = getRating(comments);
   res.send({
     status: 'ok',
     msg: 'update comment successfull',
@@ -144,10 +139,8 @@ export const deleteCommentByPlace_id = async (
     return;
   }
   const { _id } = req.user;
-  const [comments, rating] = await Promise.all([
-    deleteComment(req.params, _id.toString()),
-    getRating(req.params.place_id),
-  ]);
+  const comments = await deleteComment(req.params, _id.toString());
+  const rating = getRating(comments);
   res.code(200).send({
     status: 'ok',
     msg: 'succesful delete',
