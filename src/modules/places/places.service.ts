@@ -4,6 +4,7 @@ import Favorite from '../../db/models/favoriteModel';
 import { IconsPlaces, PlacesName } from '../../helpers/IconsPlaces';
 import { v4 as uuidv4 } from 'uuid';
 import * as geolib from 'geolib';
+import axios from 'axios';
 
 export type Location = {
   lat: string;
@@ -22,10 +23,11 @@ const endPoint = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
 
 export async function getPlaces(location: Location) {
   const url = `${endPoint}?location=${location.lat} ${location.lng}&radius=5000&key=${GOOGLE_MAPS_KEY}&accessibility=accessible`;
-  const result = await fetch(url)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
+  const result = await axios
+    .get(url)
+    .then((response) => {
+      if (response.status === 200) {
+        return response.data;
       }
     })
     .then((data) => {
@@ -66,8 +68,8 @@ const isFavorite = async (_id: string, place_id: string): Promise<boolean> => {
 export const getDetails = async (place_id: string, user_id?: string) => {
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${GOOGLE_MAPS_KEY}&fields=formatted_address,formatted_phone_number,geometry,name,international_phone_number,opening_hours,photos,place_id,website,types,wheelchair_accessible_entrance`;
 
-  const response = await fetch(url);
-  const data = await response.json();
+  const response = await axios.get(url);
+  const data = response.data;
 
   const newData = {
     formatted_address: data.result.formatted_address,
