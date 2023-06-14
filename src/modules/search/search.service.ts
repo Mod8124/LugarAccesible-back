@@ -1,7 +1,8 @@
-import { GOOGLE_MAPS_KEY } from "../../../config";
+import { GOOGLE_MAPS_KEY } from '../../../config';
+import axios from 'axios';
 
 // these are the most important type from types so I apply this on types so this return only the most useful keywords
-const keywords: {[key: string]: string} = {
+const keywords: { [key: string]: string } = {
   accounting: 'accounting',
   airport: 'airport',
   amusement_park: 'amusement_park',
@@ -92,77 +93,82 @@ const keywords: {[key: string]: string} = {
   synagogue: 'synagogue',
   taxi_stand: 'taxi_stand',
   tourist_attraction: 'tourist_attraction',
-  train_station:'train_station',
+  train_station: 'train_station',
   transit_station: 'transit_station',
-  travel_agency:'travel_agency',
-  university:'university',
-  veterinary_care:'veterinary_care',
-  zoo:'zoo'
-}
+  travel_agency: 'travel_agency',
+  university: 'university',
+  veterinary_care: 'veterinary_care',
+  zoo: 'zoo',
+};
 
-interface IGetSearchParams  {
-   lat: string,
-   lng: string,
-   query?: string,
-   types?: string
+interface IGetSearchParams {
+  lat: string;
+  lng: string;
+  query?: string;
+  types?: string;
 }
 
 interface IGeometry {
-    location: {
-      lat: number;
-      lng: number;
-    };
+  location: {
+    lat: number;
+    lng: number;
+  };
 }
 
 interface IResults {
-    business_status:string,
-    formatted_address: string,
-    name: string,
-    place_id: string,
-    types: string[],
-    location: IGeometry,
-    opening_hours: {
-      "open_now": boolean
-    },
-    wheelchair_accessible_entrance: boolean
+  business_status: string;
+  formatted_address: string;
+  name: string;
+  place_id: string;
+  types: string[];
+  location: IGeometry;
+  opening_hours: {
+    open_now: boolean;
+  };
+  wheelchair_accessible_entrance: boolean;
 }
 
 // getting the whole data from the search (first)
 const getSearch = async ({ lat, lng, query, types }: IGetSearchParams) => {
-  const response = await fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&location=${lat},${lng}&key=${GOOGLE_MAPS_KEY}&types=${types}`);
-  const data = await response.json();
+  const response = await axios.get(
+    `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&location=${lat},${lng}&key=${GOOGLE_MAPS_KEY}&types=${types}`,
+  );
+  const data = response.data;
   return data.results;
 };
 
-// getting if the place has for wheelchair sometimes the place not return nothing this mean is not accessible (second)
-export const getWeelChair = async (place_id:string) => {
-    const response = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${GOOGLE_MAPS_KEY}`);
-    const data = await response.json();
-     return "wheelchair_accessible_entrance" in data.result ? data.result.wheelchair_accessible_entrance : false;
-} 
+export const getWeelChair = async (place_id: string) => {
+  const response = await axios.get(
+    `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${GOOGLE_MAPS_KEY}`,
+  );
+  const data = response.data;
+  return 'wheelchair_accessible_entrance' in data.result
+    ? data.result.wheelchair_accessible_entrance
+    : false;
+};
 
-// filter the types from the keywords of the top of the file
-export const filteredTypes = (type:string) => {
-    return type === keywords[type]
-}
+export const filteredTypes = (type: string) => {
+  return type === keywords[type];
+};
 
+const getResults = async ({ lat, lng, query, types }: IGetSearchParams): Promise<IResults[]> => {
+  const results = await getSearch({ lat, lng, query, types });
+  const newResults = await Promise.all(
+    results.map(async (result: any) => {
+      const wheelchair_accessible_entrance = await getWeelChair(result.place_id);
+      const opening_hours = result.opening_hours ? result.opening_hours : { open_now: false };
+      return {
+        business_status: result.business_status,
+        formatted_address: result.formatted_address,
+        name: result.name,
+        place_id: result.place_id,
+        types: result.types.filter(filteredTypes),
+        location: result.geometry.location,
+        opening_hours,
+        wheelchair_accessible_entrance,
+      };
+    }),
+  );
 
-export const getResults = async ({ lat, lng, query, types }: IGetSearchParams):Promise<IResults[]> => {
-    const results = await getSearch({ lat, lng, query, types });
-    const newResults = await Promise.all(results.map(async (result:any) => {
-    const wheelchair_accessible_entrance = await getWeelChair(result.place_id);
-    const opening_hours = result.opening_hours ? result.opening_hours : { open_now: false };
-    return {
-      business_status: result.business_status,
-      formatted_address: result.formatted_address,
-      name: result.name,
-      place_id: result.place_id,
-      types: result.types.filter(filteredTypes),
-      location: result.geometry.location,
-      opening_hours,
-      wheelchair_accessible_entrance
-    };
-  }));
-   
   return newResults;
 };
