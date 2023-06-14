@@ -151,7 +151,12 @@ export const filteredTypes = (type: string) => {
   return type === keywords[type];
 };
 
-const getResults = async ({ lat, lng, query, types }: IGetSearchParams): Promise<IResults[]> => {
+export const getResults = async ({
+  lat,
+  lng,
+  query,
+  types,
+}: IGetSearchParams): Promise<IResults[]> => {
   const results = await getSearch({ lat, lng, query, types });
   const newResults = await Promise.all(
     results.map(async (result: any) => {
